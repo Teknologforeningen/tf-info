@@ -53,7 +53,7 @@ To start the development server:
 
 	$ python manage.py runserver
 
-The service is now accessible at [http://localhost:8000].
+The service is now accessible at http://localhost:8000.
 
 To create a superuser:
 
