@@ -36,10 +36,11 @@ body {
 	flex-direction: column;
 }
 
-#tf-logo {
-    width: 100px;
-    vertical-align:middle;
-    margin-right:-4px;
+
+#github-logo {
+	position: absolute;
+	right: 4px;
+	bottom: 4px;
 }
 
 #tf-logo {
