@@ -24,7 +24,10 @@ SECRET_KEY = env('SECRET_KEY', 'secret_key')
 DEBUG = env('DEBUG', False)
 TEMPLATE_DEBUG = DEBUG
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [
+    '.teknologforeningen.fi',
+    '.teknolog.fi'
+]
 
 
 # Application definition
