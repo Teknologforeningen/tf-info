@@ -6,7 +6,8 @@
 
 * [Python2](https://www.python.org/downloads/)
 * [pip](http://www.pip-installer.org/)
-* [git](http://git-scm.com/) och [git-flow](https://github.com/nvie/gitflow)
+* [git](http://git-scm.com/)
+* ([git-flow](https://github.com/nvie/gitflow))
 
 ## Virtualenv
 
