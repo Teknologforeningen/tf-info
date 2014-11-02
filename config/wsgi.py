@@ -9,7 +9,7 @@ https://docs.djangoproject.com/en/1.6/howto/deployment/wsgi/
 import os, sys
 
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))
-ENV = sys.path.append(os.path.join(BASE_DIR,'../.env'))
+ENV = os.path.join(BASE_DIR,'.env')
 
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "config.settings")
 
