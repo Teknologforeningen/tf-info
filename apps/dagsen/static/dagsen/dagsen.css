@@ -1,0 +1,15 @@
+#dagsen-meny h2 {
+	font-size: 4em;
+	font-weight: 300;
+}
+
+#dagsen-meny li {
+	font-size: 2.5em;
+	list-style-type: none;
+}
+
+#ipcam {
+  margin-top: 24px;
+  width: 100%;
+  height: auto;
+}

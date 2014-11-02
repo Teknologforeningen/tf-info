@@ -1,0 +1,7 @@
+venv/
+.env
+*.pyc
+*.swp
+db.sqlite3
+.coverage
+.DS_Store

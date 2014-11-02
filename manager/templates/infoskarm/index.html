@@ -1,0 +1,43 @@
+{% load staticfiles %}
+<html>
+<head>
+	<title>Teknologföreningen</title>
+
+	<!-- Bootstrap -->
+	<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
+
+	<!-- Font -->
+	<link href='//fonts.googleapis.com/css?family=Roboto:400,500,900,300italic,300,100,100italic' rel='stylesheet' type='text/css'>
+
+	<!-- CSS -->
+	<link rel="stylesheet" type="text/css" href="{% static 'infoskarm/style.css' %}" >
+	<link rel="stylesheet" type="text/css" href="{% static 'dagsen/dagsen.css' %}" >
+	<link rel="stylesheet" type="text/css" href="{% static 'reittiopas/reittiopas.css' %}" >
+	<link rel="stylesheet" type="text/css" href="{% static 'kalender/kalender.css' %}" >
+	<link rel="stylesheet" type="text/css" href="{% static 'fonts/climacons-font.css' %}">
+</head>
+<body>
+	<div class="wrapper">
+		<div class="top-bar">
+			<div class="left">
+				<img id="tf-logo" src="{% static 'infoskarm/tf-logo.png' %}" alt="TF">
+			</div>
+			<div id="small-screen" class="center"></div>
+			<div class="right">
+				<span id="time"></span>
+				<span id="date"></span>
+			</div>
+		</div>
+
+		<div class="container" id="content">
+		</div>
+	</div>
+
+	<!-- JavaScript -->
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.0/jquery.min.js"></script>
+	<script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+
+	<script src="{% static 'infoskarm/clock.js' %}"></script>
+	<script src="{% static 'infoskarm/pages.js' %}"></script>
+	<script src="{% static 'infoskarm/small-screen.js' %}"></script>
+</body>
