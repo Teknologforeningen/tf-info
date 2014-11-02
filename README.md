@@ -76,7 +76,7 @@ To load some example pages:
 
 To deploy the service to a webserver use:
 
-	$ fab deploy <username@webserver>
+	$ fab deploy
 
 # Architecture
 
