@@ -85,8 +85,6 @@ class Page(OrderedModel):
         if re.match(r'/', self.url) is None:
             self.url = '/%s'%self.url
 
-        self.edited_by = self.request.user
-
         super(Page, self).save(*args, **kwargs)
 
 

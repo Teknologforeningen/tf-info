@@ -18,7 +18,7 @@ class PageTestCase(TestCase):
     def test_paused_page_not_active(self):
         """Page that has been paused is not active."""
         page = Page.objects.get(url="/testurl")
-        page.paused_at = timezone.now().replace(hour=12)
+        page.pause_at = timezone.now().replace(hour=12)
         current_time = timezone.now().replace(hour=13)
 
         self.assertTrue(page.is_paused(current_time))

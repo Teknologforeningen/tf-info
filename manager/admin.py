@@ -22,8 +22,7 @@ class PageAdmin(OrderedModelAdmin):
         queryset.update(paused_at=None)
 
     def save_model(self, request, obj, form, change):
-        if obj.creator is None:
-            obj.creator = request.user
+        obj.edited_by = request.user
         obj.save()
 
 admin.site.register(Page, PageAdmin)
