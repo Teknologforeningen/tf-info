@@ -1,4 +1,5 @@
-# Infoskärmarna - Reborn
+# TF - Info
+A webservice to display info-screens around [Teknologföreningen](http://www.teknologforeningen.fi).
 
 # Installation
 
@@ -17,6 +18,8 @@ Virtualenv is not mandatory but highly recommended as it makes it much easier to
 
 [virtualenvwrapper](http://virtualenvwrapper.readthedocs.org/en/latest/) is also a handy tool for using virtualenv.
 
+Alternative ways of keeping your dev environment isolated are [Docker](https://www.docker.com/) (+ [Fig](http://www.fig.sh/)) and [Vagrant](https://www.vagrantup.com/).
+
 ## Repository
 
 Clone the repository:
@@ -26,6 +29,8 @@ Clone the repository:
 Initialize git-flow:
 
 	git flow init -d
+
+The `-d` is for the default options. Git-flow needs to be initialized each time you clone the repository.
 
 ## Install Python requirements
 
@@ -39,7 +44,7 @@ Start using the virtualenv environment with the following command:
 
 **This command needs to be executed each time you start working on the project to make sure you're using the Python environment specific to this project.**
 
-Now, to install all of the Python libraries required you simply run:
+Now, to install all of the Python libraries required you run:
 
 	pip install -r requirements.txt
 
@@ -87,5 +92,30 @@ info-reborn			- root of the project
 	manager			- app to manage the info screen pages and users
 ```
 
+# Usage
 
+To edit the pages displayed navigate to the admin UI at `/admin/`.
+
+Once you're logged in you can add, remove or edit the pages.
+
+A page stores the url and descriptions of the page to be displayed as well as information about when the page should be displayed. The different apps in the service expose different url that can be used for pages.
+
+|URL         |Description          |App       |
+|------------|---------------------|----------|
+|/dagsen/    |Today's lunch menu   |dagsen    |
+|/reittiopas/|Bus schedules        |reittiopas|
+|/calendar/  |Event calendar       |kalender  |
+
+## Page fields
+
+|Field          |Description                                               |
+|---------------|----------------------------------------------------------|
+|Url            |The url to display (see table above)                      |
+|Duration       |Duration (in seconds) to display the page                 |
+|Title          |Title to display in the admin interface                   |
+|Description    |Description displayed in the admin interface              |
+|Edited by      |The user who last edited the page                         |
+|Pause at       |Time and date to pause the page. Clear field to unpause.  |
+|Date and Time  |Fields to set the time of day and date to display the page|
+|Weekdays       |Weekdays to display the page                              |
 

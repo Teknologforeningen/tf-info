@@ -7,13 +7,13 @@ import re
 
 class Page(OrderedModel):
     url         = models.CharField("Url of page to display (relative to root).", max_length=90)
-    duration    = models.PositiveIntegerField(default=10)
+    duration    = models.PositiveIntegerField("Duration (seconds)", default=10)
 
     title       = models.CharField(max_length=100)
     description = models.TextField(blank=True, null=True)
-    creator     = models.ForeignKey(User, blank=True, null=True)
+    edited_by   = models.ForeignKey(User, blank=True, null=True)
 
-    paused_at = models.DateTimeField(blank=True, null=True)
+    pause_at = models.DateTimeField(blank=True, null=True)
 
     active_time_start   = models.TimeField("Time of day to start displaying page.", default=time(0,0))
     active_time_end     = models.TimeField("Time of day to stop displaying page. ", default=time(0,0))
@@ -60,21 +60,21 @@ class Page(OrderedModel):
 
     def is_paused(self, current_time=timezone.now()):
         # Check paused state
-        if self.paused_at is None:
+        if self.pause_at is None:
             return False
 
         # Paused more than 24h ago
-        if current_time > self.paused_at + timedelta(hours=24):
-            self.paused_at = None
+        if current_time > self.pause_at + timedelta(hours=24):
+            self.pause_at = None
             return False
 
         # Pause not active yet
-        if current_time < self.paused_at:
+        if current_time < self.pause_at:
             return False
 
         # Paused before today and time is now past 06:00
-        if self.paused_at.date() < current_time.date() and current_time.time() > time(6,00):
-            self.paused_at = None
+        if self.pause_at.date() < current_time.date() and current_time.time() > time(6,00):
+            self.pause_at = None
             return False
 
         return True
@@ -84,6 +84,9 @@ class Page(OrderedModel):
         # Add root if not present
         if re.match(r'/', self.url) is None:
             self.url = '/%s'%self.url
+
+        self.edited_by = self.request.user
+
         super(Page, self).save(*args, **kwargs)
 
 
