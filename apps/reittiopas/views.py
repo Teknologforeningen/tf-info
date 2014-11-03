@@ -56,6 +56,6 @@ def index(request):
 
 		all_departures = all_departures + departures
 
-	sorted_departures = sorted(all_departures, key=itemgetter('datetime'))
+	sorted_departures = sorted(all_departures, key=itemgetter('datetime'))[:10]
 
 	return render_to_response('reittiopas/index.html', {"departures": sorted_departures}, context_instance=RequestContext(request))
