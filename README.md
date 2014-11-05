@@ -28,7 +28,9 @@ Clone the repository:
 
 Initialize git-flow:
 
-	git flow init -d
+	git checkout master && git flow init -d
+
+(If the above command fails you probably need to manually fetch the remote branch 'master')
 
 The `-d` is for the default options. Git-flow needs to be initialized each time you clone the repository.
 
