@@ -50,6 +50,20 @@ Now, to install all of the Python libraries required you run:
 
 	pip install -r requirements.txt
 
+## Set up environment file
+
+The service reads a bunch of settings from environment variables. The easiest way to set these is to set them in a `.env` file located in the root of the project. This will be read and set by `manage.py`. Add this file with the appropriate environment variables like shown in the example below.
+
+```
+DEBUG=True
+SECRET_KEY=<random secret>
+STATIC_ROOT=/path/to/repo/tf-info/static/
+DATABASE=sqlite:////path/to/repository/tf-info/db.sqlite3
+REITTIOPAS_USER=<user>
+REITTIOPAS_TOKEN=<token>
+REITTIOPAS_STOPS=E2226,E2225
+KALENDER_ICAL=https://www.teknol...
+```
 
 ## Development
 
