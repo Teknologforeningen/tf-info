@@ -63,6 +63,7 @@ REITTIOPAS_USER=<user>
 REITTIOPAS_TOKEN=<token>
 REITTIOPAS_STOPS=E2226,E2225
 KALENDER_ICAL=https://www.teknol...
+CAM_URL=http://....
 ```
 
 ## Development
