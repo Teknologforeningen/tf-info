@@ -93,7 +93,7 @@ OPENWEATHERMAP_TO_CLIMACON={
 	800: "sun",
 	801: "sun",
 	802: "cloud sun",
-	003: "cloud sun",
+	803: "cloud sun",
 	804: "cloud sun",
 	900: "tornado",
 	901: "tornado",
