@@ -3,11 +3,13 @@ from django.template import RequestContext
 from django.http import HttpResponse
 from django.views.decorators.cache import cache_page
 import json
-import urllib2
+import urllib2, urllib
 import datetime
 
 # Cache kept for
 minutes = 10
+
+cam_url =  settings.CAM_URL
 
 def nextMeal():
   now = datetime.datetime.now()
@@ -33,3 +35,19 @@ def index(request, language='sv'):
     return HttpResponse("Error parsing json from api", status=500)
 
   return render_to_response('dagsen/index.html',menu,context_instance=RequestContext(request))
+
+@cache_page(5)
+def queuecam(request):
+  stream=urllib.urlopen(cam_url)
+  bytes=''
+  for x in range(0, 1000):
+    bytes+=stream.read(1024)
+    a = bytes.find('\xff\xd8')
+    b = bytes.find('\xff\xd9')
+    if a!=-1 and b!=-1:
+        jpg = bytes[a:b+2]
+        bytes= bytes[b+2:]
+        return HttpResponse(jpg, content_type="image/jpeg")
+
+  return HttpResponse("Unable to access camera.", status=500)
+
