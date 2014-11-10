@@ -118,5 +118,7 @@ REITTIOPAS_STOPS=env('REITTIOPAS_STOPS').split(',')
 # Kalender
 KALENDER_ICAL=env('KALENDER_ICAL')
 
+# IP Camera
+CAM_URL=env('CAM_URL')
 
 

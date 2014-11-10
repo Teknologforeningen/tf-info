@@ -9,8 +9,7 @@ import datetime
 # Cache kept for
 minutes = 10
 
-cam_url = 'http://borg.teknolog.fi:800/cgi/sf.cgi'
-# cam_url = 'http://localhost:8080/cgi/sf.cgi'
+cam_url =  settings.CAM_URL
 
 def nextMeal():
   now = datetime.datetime.now()
