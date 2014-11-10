@@ -2,6 +2,7 @@ from django.shortcuts import render_to_response
 from django.template import RequestContext
 from django.http import HttpResponse
 from django.views.decorators.cache import cache_page
+from django.conf import settings
 import json
 import urllib2, urllib
 import datetime
