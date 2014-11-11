@@ -33,7 +33,8 @@ class Page(OrderedModel):
     def is_active(self, current_time=timezone.now()):
             # import pdb; pdb.set_trace()
             # Check time of day
-            now = current_time.time()
+            now = timezone.localtime(current_time).time()
+
             if self.active_time_end > self.active_time_start:
                 if now < self.active_time_start or now > self.active_time_end:
                     return False
