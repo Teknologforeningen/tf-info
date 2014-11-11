@@ -5,7 +5,7 @@ from django.views.decorators.cache import cache_page
 from django.conf import settings
 import json
 import urllib2, urllib
-import datetime
+import datetime, calendar
 
 # Cache kept for
 minutes = 10
@@ -34,6 +34,8 @@ def index(request, language='sv'):
     menu = json.load(response)
   except ValueError as e:
     return HttpResponse("Error parsing json from api", status=500)
+
+  menu['cachebuster'] = calendar.timegm(datetime.datetime.now().utctimetuple())
 
   return render_to_response('dagsen/index.html',menu,context_instance=RequestContext(request))
 
