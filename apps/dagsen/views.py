@@ -5,7 +5,7 @@ from django.views.decorators.cache import cache_page
 from django.conf import settings
 import json
 import urllib2, urllib
-import datetime, calendar
+import datetime, random
 
 # Cache kept for
 minutes = 10
@@ -35,7 +35,8 @@ def index(request, language='sv'):
   except ValueError as e:
     return HttpResponse("Error parsing json from api", status=500)
 
-  menu['cachebuster'] = calendar.timegm(datetime.datetime.now().utctimetuple())
+
+  menu['cachebuster'] = random.randint(0, 99999)
 
   return render_to_response('dagsen/index.html',menu,context_instance=RequestContext(request))
 
@@ -50,7 +51,9 @@ def queuecam(request):
     if a!=-1 and b!=-1:
         jpg = bytes[a:b+2]
         bytes= bytes[b+2:]
-        return HttpResponse(jpg, content_type="image/jpeg")
+        response = HttpResponse(jpg, content_type="image/jpeg")
+        response['Cache-Control'] = 'max-age=0, no-cache, no-store'
+        return response
 
   return HttpResponse("Unable to access camera.", status=500)
 
