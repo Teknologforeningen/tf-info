@@ -50,4 +50,4 @@ def index(request):
       if start > now:
         events.append(e)
 
-  return render_to_response('kalender/index.html', {"events":events}, context_instance=RequestContext(request))
+  return render_to_response('kalender/index.html', {"events":events[:8]}, context_instance=RequestContext(request))
