@@ -12,6 +12,7 @@ urlpatterns = patterns('',
     url(r'^reittiopas/', include('apps.reittiopas.urls'), name='reittiopas'),
     url(r'^weather/', include('apps.weather.urls'), name='weather'),
     url(r'^calendar/', include('apps.kalender.urls'), name='calendar'),
+    url(r'^weathermap/', include('apps.weathermap.urls'), name='weathermap'),
 
     # Wildcard
     url(r'^', include('manager.urls'), name='frontpage'),

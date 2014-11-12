@@ -46,7 +46,8 @@ INSTALLED_APPS = (
     'apps.dagsen',
     'apps.reittiopas',
     'apps.weather',
-    'apps.kalender'
+    'apps.kalender',
+    'apps.weathermap'
 )
 
 MIDDLEWARE_CLASSES = (
