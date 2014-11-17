@@ -105,6 +105,7 @@ info-reborn			- root of the project
 		dagsen		- display lunch menu
 		reittiopas	- display bus schedules
 		weather		- display weather
+		weathermap	- display weathermap
 	config 			- project configurations
 	manager			- app to manage the info screen pages and users
 ```
