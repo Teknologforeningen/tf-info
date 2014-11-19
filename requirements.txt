@@ -7,3 +7,4 @@ icalendar
 django-dotenv
 django-getenv
 dj-database-url
+django-filebrowser

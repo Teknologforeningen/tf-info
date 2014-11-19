@@ -1,4 +1,7 @@
 venv/
+media/
+static/
+
 .env
 *.pyc
 *.swp
