@@ -113,7 +113,11 @@ STATIC_ROOT = env('STATIC_ROOT')
 # Static files are css/JS
 MEDIA_URL = '/media/'
 MEDIA_ROOT = env('MEDIA_ROOT')
+
+# Filebrowser settings related to MEDIA_ROOT
 FILEBROWSER_DIRECTORY = "uploads/"
+FILEBROWSER_VERSIONS_BASEDIR = "_versions/"
+FILEBROWSER_DEFAULT_PERMISSIONS = 0644
 
 #
 # Apps settings
