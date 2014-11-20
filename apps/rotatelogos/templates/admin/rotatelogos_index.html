@@ -1,0 +1,26 @@
+{% extends "admin/index.html" %}
+
+{% block content %}
+{{block.super}}
+<div class="g-d-c">
+    <div class="g-d-12 g-d-f">
+        
+        <!-- Add link to filebrowser and Refresh button-->
+        <div class="grp-module" id="app_rotatelogos">
+            <h2><a href="#" class="grp-section">Rotate Logos</a></h2>
+            
+            <div class="grp-row">
+                <a href="/admin/filebrowser/browse" class="grp-section"><strong>Go to filebrowser</strong></a>
+            </div>
+
+            <div class="grp-row"> 
+                <a href="#" class="grp-section"><strong>Refresh logos</strong></a>
+            </div>
+        </div>
+    </div>
+    
+</div>
+{% endblock content %}
+    
+
+

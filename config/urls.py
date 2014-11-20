@@ -16,6 +16,7 @@ urlpatterns = patterns('',
     url(r'^weather/', include('apps.weather.urls'), name='weather'),
     url(r'^calendar/', include('apps.kalender.urls'), name='calendar'),
     url(r'^weathermap/', include('apps.weathermap.urls'), name='weathermap'),
+    url(r'^rotatelogos/', include('apps.rotatelogos.urls'), name='rotatelogos'),
 
     # Wildcard
     url(r'^', include('manager.urls'), name='frontpage'),
