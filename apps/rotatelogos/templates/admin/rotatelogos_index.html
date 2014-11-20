@@ -1,6 +1,19 @@
 {% extends "admin/index.html" %}
 
 {% block content %}
+<script>
+    var getRefresha = function() {
+        var xmlHttp = null;
+
+        xmlHttp = new XMLHttpRequest();
+        xmlHttp.open( "GET", "/rotatelogos/refresha", false );
+        xmlHttp.send( null );
+        document.getElementById("status_field").innerHTML = xmlHttp.responseText;
+    };
+</script>
+
+
+<div id="status_field"></div>
 {{block.super}}
 <div class="g-d-c">
     <div class="g-d-12 g-d-f">
@@ -14,7 +27,7 @@
             </div>
 
             <div class="grp-row"> 
-                <a href="#" class="grp-section"><strong>Refresh logos</strong></a>
+                <a href="#"  onclick="getRefresha()" class="grp-section"><strong>Refresh logos</strong></a>
             </div>
         </div>
     </div>
