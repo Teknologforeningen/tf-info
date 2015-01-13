@@ -1,6 +1,6 @@
 from django.contrib import admin
 from ordered_model.admin import OrderedModelAdmin
-from rotatelogos.models import Logo
+from apps.rotatelogos.models import Logo
 
 class LogoAdmin(OrderedModelAdmin):
     pass
