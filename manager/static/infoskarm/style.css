@@ -96,3 +96,6 @@ body {
 iframe#proxy {
 	width: 100%;
 }
+#footer_left {
+	padding: 2px;
+}

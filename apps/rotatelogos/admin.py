@@ -1,8 +1,7 @@
 from django.contrib import admin
-from ordered_model.admin import OrderedModelAdmin
 from apps.rotatelogos.models import Logo
 
-class LogoAdmin(OrderedModelAdmin):
+class LogoAdmin(admin.ModelAdmin):
     pass
 
 admin.site.register(Logo, LogoAdmin)
