@@ -49,7 +49,8 @@ INSTALLED_APPS = (
     'apps.weather',
     'apps.kalender',
     'apps.weathermap',
-    'apps.rotatelogos'
+    'apps.rotatelogos',
+    'apps.voteresults'
 )
 
 MIDDLEWARE_CLASSES = (
@@ -133,3 +134,6 @@ KALENDER_ICAL=env('KALENDER_ICAL')
 
 # IP Camera
 CAM_URL=env('CAM_URL')
+
+#Voteresult results
+VOTERESULTS_URL=env('VOTE_RESULT')
