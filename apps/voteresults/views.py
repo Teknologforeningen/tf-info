@@ -38,7 +38,7 @@ class Result:
 	def set_color(self, color):
 		self.color = color
 
-#@cache_page(60 * 10)
+@cache_page(60 * 10)
 def index(request):
 	try:
 		response = urllib2.urlopen(settings.VOTERESULTS_URL)
