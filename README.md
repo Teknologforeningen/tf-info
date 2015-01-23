@@ -105,6 +105,7 @@ info-reborn			- root of the project
 		dagsen		- display lunch menu
 		reittiopas	- display bus schedules
 		weather		- display weather
+		weathermap	- display weathermap
 	config 			- project configurations
 	manager			- app to manage the info screen pages and users
 ```
@@ -122,6 +123,7 @@ A page stores the url and descriptions of the page to be displayed as well as in
 |/dagsen/    |Today's lunch menu   |dagsen    |
 |/reittiopas/|Bus schedules        |reittiopas|
 |/calendar/  |Event calendar       |kalender  |
+|/weathermap/|Specifik weathermap  |weathermap|
 
 ## Page fields
 

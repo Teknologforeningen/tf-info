@@ -34,6 +34,7 @@ ALLOWED_HOSTS = [
 
 INSTALLED_APPS = (
     'grappelli',
+    'filebrowser',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -46,7 +47,10 @@ INSTALLED_APPS = (
     'apps.dagsen',
     'apps.reittiopas',
     'apps.weather',
-    'apps.kalender'
+    'apps.kalender',
+    'apps.weathermap',
+    'apps.rotatelogos',
+    'apps.voteresults'
 )
 
 MIDDLEWARE_CLASSES = (
@@ -106,6 +110,16 @@ USE_TZ = True
 STATIC_URL = '/static/'
 STATIC_ROOT = env('STATIC_ROOT')
 
+# Media files are the same as static, but meant for file uploads
+# Static files are css/JS
+MEDIA_URL = '/media/'
+MEDIA_ROOT = env('MEDIA_ROOT')
+
+# Filebrowser settings related to MEDIA_ROOT
+FILEBROWSER_DIRECTORY = "uploads/"
+FILEBROWSER_VERSIONS_BASEDIR = "_versions/"
+FILEBROWSER_DEFAULT_PERMISSIONS = 0644
+
 #
 # Apps settings
 #
@@ -121,4 +135,5 @@ KALENDER_ICAL=env('KALENDER_ICAL')
 # IP Camera
 CAM_URL=env('CAM_URL')
 
-
+#Voteresult results
+VOTERESULTS_URL=env('VOTE_RESULT')

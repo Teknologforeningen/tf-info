@@ -13,6 +13,31 @@ body {
 	flex-direction: column;
 }
 
+.footer {
+	position: relative;
+	margin-top: -100px; /* negative value of footer height */
+	height: 100px;
+	clear:both;
+	background-color: white;
+
+	display: flex;
+	flex-direction: row;
+}
+
+.footer div {
+	flex: 1;
+}
+
+.footer .center {
+	text-align: center;
+}
+.footer .right {
+	text-align: right;
+	display: flex;
+	flex-direction: column;
+}
+
+
 #content {
 	flex: 1;
 }
@@ -70,4 +95,7 @@ body {
 
 iframe#proxy {
 	width: 100%;
+}
+#footer_left {
+	padding: 2px;
 }
