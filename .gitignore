@@ -1,6 +1,6 @@
 venv/
 media/
-static/
+/static/
 
 .env
 *.pyc
