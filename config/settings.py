@@ -50,7 +50,8 @@ INSTALLED_APPS = (
     'apps.kalender',
     'apps.weathermap',
     'apps.rotatelogos',
-    'apps.voteresults'
+    'apps.voteresults',
+    'apps.arsfest'
 )
 
 MIDDLEWARE_CLASSES = (
