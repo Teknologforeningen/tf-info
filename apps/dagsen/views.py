@@ -12,7 +12,7 @@ minutes = 10
 def nextMeal():
   now = datetime.datetime.now()
   if now.weekday() < 5 and now.hour > 16:
-    # Weekends and after 16 show next day
+    # after 16 show next day
     return 1
   else:
     # Else show current day
