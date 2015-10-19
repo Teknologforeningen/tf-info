@@ -2,18 +2,20 @@
 from django.shortcuts import render_to_response
 from django.template import RequestContext
 from django.http import HttpResponse
+from django.conf import settings
 from django.views.decorators.cache import cache_page
 import json, re 
 import urllib2
 
-WEATHER_LOCATION='Espoo,FI'
+WEATHER_LOCATION=settings.WEATHER_LOCATION
+WEATHER_APIKEY=settings.WEATHER_APIKEY
 
 @cache_page(60 * 5) # 5 minutes
 def index(request):
 
 
 	# Forecast
-	url = 'http://api.openweathermap.org/data/2.5/weather?q=%s'%WEATHER_LOCATION
+	url = 'http://api.openweathermap.org/data/2.5/weather?q=%s&APPID=%s'% (WEATHER_LOCATION, WEATHER_APIKEY)
 	try:
 		response = urllib2.urlopen(url)
 	except Exception as e:
