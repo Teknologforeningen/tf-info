@@ -8,20 +8,45 @@ body {
 .wrapper {
 	width: 100%;
 	height: 100%;
-	padding: 2%;
+	padding: 10px;
+	display: flex;
+	flex-direction: column;
+}
+
+
+
+#content {
+	flex: 1;
+	position: relative;
+}
+
+.header {
+	height: 100px;
+	padding-bottom: 10px;
+	display: flex;
+	flex-direction: row;
+}
+
+.header div {
+	flex: 1;
+}
+
+.header .center {
+	text-align: center;
+}
+.header .right {
+	text-align: right;
 	display: flex;
 	flex-direction: column;
 }
 
 .footer {
-	position: relative;
-	margin-top: -100px; /* negative value of footer height */
-	height: 100px;
-	clear:both;
+	height: 110px;
+	padding-top: 10px;
 	background-color: white;
-
 	display: flex;
 	flex-direction: row;
+	position: relative;
 }
 
 .footer div {
@@ -37,35 +62,10 @@ body {
 	flex-direction: column;
 }
 
-
-#content {
-	flex: 1;
-}
-
-.top-bar {
-	height: 100px;
-	display: flex;
-	flex-direction: row;
-}
-
-.top-bar div {
-	flex: 1;
-}
-
-.top-bar .center {
-	text-align: center;
-}
-.top-bar .right {
-	text-align: right;
-	display: flex;
-	flex-direction: column;
-}
-
-
 #github-logo {
 	position: absolute;
-	right: 4px;
-	bottom: 4px;
+	right: 0;
+	bottom: 0;
 }
 
 #tf-logo {
@@ -94,8 +94,11 @@ body {
 }
 
 iframe#proxy {
+	position: absolute;
+	height: 100%;
 	width: 100%;
 }
+
 #footer_left {
 	padding: 2px;
 }
