@@ -16,7 +16,7 @@ Takes in results from a vote in the following format:
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 </head>
 <body>
-0:1<br>1:0<br>2:0<br>3:0<br>4:0<br>5:0<br>9:0<br></body>
+0:1<br>1:0<br>2:0<br>3:0<br>4:0<br>5:0<br>9:0<br>10:0<br></body>
 </html>
 
 Parses and adds colors
@@ -51,7 +51,7 @@ def index(request):
 	votes = []
 
 	for x in result:
-		x = x.replace("\n","")
+		x = x.strip();
 		if len(x) == 0:
 			continue
 
@@ -78,12 +78,16 @@ def index(request):
 		elif x.id == 9:
 			x.id = 3
 			x.set_color("#FF1919")
+		elif x.id == 10:
+			x.id = 5
+			x.set_color("#FFFF00")
+
+		# ^ that is seriously bad code -_-'
 
 		x.pos = x.id *22
 
 		if int(x.count) > 20:
 			x.size = 95
-
 		else:
 			x.size = int((float(x.count) / 20) * 95)
 
