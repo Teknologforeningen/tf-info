@@ -50,7 +50,8 @@ INSTALLED_APPS = (
     'apps.kalender',
     'apps.weathermap',
     'apps.rotatelogos',
-    'apps.voteresults'
+    'apps.voteresults',
+    'apps.arsfest'
 )
 
 MIDDLEWARE_CLASSES = (
@@ -137,3 +138,7 @@ CAM_URL=env('CAM_URL')
 
 #Voteresult results
 VOTERESULTS_URL=env('VOTE_RESULT')
+
+#Weather API key
+WEATHER_APIKEY=env('WEATHER_APIKEY')
+WEATHER_LOCATION=env('WEATHER_LOCATION')
