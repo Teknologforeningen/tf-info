@@ -48,6 +48,7 @@ class PageTestCase(TestCase):
 
         # Set start time in the future
         page.active_time_start = now.replace(hour=13).time()
+        self.assertTrue(page.active_time_start > now.time())
         self.assertFalse(page.is_active(now))
 
         # Set time to be past start time
@@ -89,7 +90,7 @@ class PageTestCase(TestCase):
     def test_page_weekdays(self):
         """Page is active on certain weekdays"""
         page = Page.objects.get(url="/testurl")
-        now = datetime(2014, 4, 28, 16, 53) # Monday
+        now = timezone.make_aware(datetime(2014, 4, 28, 16, 53), timezone.get_current_timezone()) # Monday
         page.active_date_start = now.date()
 
         self.assertTrue(page.is_active(now))
@@ -100,5 +101,8 @@ class PageTestCase(TestCase):
         now = now + timedelta(days=1)
         self.assertTrue(page.is_active(now))
 
-
+    def test_timezone(self):
+        """Timezone should be Helsinki"""
+        now = timezone.now()
+        self.assertTrue(timezone.get_current_timezone_name() == 'Europe/Helsinki')
 
