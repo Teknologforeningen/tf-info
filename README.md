@@ -52,7 +52,7 @@ Now, to install all of the Python libraries required you run:
 
 ## Set up environment file
 
-The service reads a bunch of settings from environment variables. The easiest way to set these is to set them in a `.env` file located in the root of the project. This will be read and set by `manage.py`. Add this file with the appropriate environment variables like shown in the .env.example file.
+The service reads a bunch of settings from environment variables. The easiest way to set these is to set them in a `.env` file located in the root of the project. This will be read and set by `manage.py`. Add this file with the appropriate environment variables like shown in the `.env.example` file.
 
 ## Development
 
