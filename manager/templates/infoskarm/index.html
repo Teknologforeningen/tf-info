@@ -17,39 +17,36 @@
 	<link rel="stylesheet" type="text/css" href="{% static 'fonts/climacons-font.css' %}">
 </head>
 <body>
-	
-	<div class="wrapper">
-		<div class="header">
-			<div class="left">
-				<img id="tf-logo" src="{% static 'infoskarm/tf-logo.png' %}" alt="TF">
-			</div>
-			<div id="small-screen" class="center"></div>
-			<div class="right">
-				<span id="time"></span>
-				<span id="date"></span>
-			</div>
+	<div class="header">
+		<div class="left">
+			<img id="tf-logo" src="{% static 'infoskarm/tf-logo.png' %}" alt="TF">
 		</div>
-
-		<div id="content">
+		<div id="small-screen" class="center"></div>
+		<div class="right">
+			<span id="time"></span>
+			<span id="date"></span>
 		</div>
+	</div>
 
-		<div class="footer">
-			<div class="left" id="footer_left">
-					<!-- Content for left here -->
-			</div>
-			<div class="center" id="footer_center">
-				<!-- Place content for center here -->
-			</div>
-			<div class="right">
-				<a href="https://github.com/Teknologforeningen/tf-info" target="_blank">
-					<img id="github-logo" src="{% static 'infoskarm/github.png' %}" width="32" height="32" alt="TF">
-				</a>
-				<!-- Other content for right here -->
-			</div>
-			
-		</div> <!-- end footer-->
+	<div id="content">
+	</div>
 
-	</div><!-- end wrapper -->
+	<div class="footer">
+		<div id="footer_left">
+				<!-- Content for left here -->
+		</div>
+		<div id="footer_center">
+			<!-- Place content for center here -->
+		</div>
+		<div id="footer_right">
+			<a href="https://github.com/Teknologforeningen/tf-info" target="_blank">
+				<img src="{% static 'infoskarm/github.png' %}" width="32" height="32" alt="TF">
+			</a>
+			<!-- Other content for right here -->
+		</div>
+		
+	</div> <!-- end footer-->
+
 	<!-- JavaScript -->
 	<script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.0/jquery.min.js"></script>
 	<script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
