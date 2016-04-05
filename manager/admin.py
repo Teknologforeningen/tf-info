@@ -9,6 +9,7 @@ class PageAdmin(OrderedModelAdmin):
 
     fieldsets = (
         (None, {'fields': ('url', 'duration', 'title', 'description', 'edited_by', 'pause_at')}),
+        ('Image', {'fields': ('image', 'hide_top_bar', 'hide_bottom_bar')}),
         ('Date and Time', {'fields': ('active_time_start', 'active_time_end', 'active_date_start', 'active_date_end')}),
         ('Weekdays to display', {'fields': ('monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday')})
     )

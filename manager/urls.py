@@ -5,10 +5,11 @@ from django.conf import settings
 
 urlpatterns = patterns('',
 
-	#Root
+    #Root
     url(r'^$', views.index, name='frontpage'),
 
     url(r'^pages/(?P<index>\d+)/?$', views.get_page, name='get_page'),
+    url(r'^image/(?P<page>\d+)/?$', views.get_image, name='get_image'),
     url(r'^pages/$', RedirectView.as_view(url='/pages/0/', permanent=False)),
     url(r'^(?P<url>https?://.+)', views.proxy, name='proxy_page')
 )

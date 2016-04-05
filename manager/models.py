@@ -7,6 +7,7 @@ import re
 
 class Page(OrderedModel):
     url         = models.CharField("Url of page to display (relative to root).", max_length=90)
+    image       = models.ImageField("Image to show instead of URL. If image is specified URL wont be used", upload_to="images/", null=True, blank=True)
     duration    = models.PositiveIntegerField("Duration (seconds)", default=10)
 
     title       = models.CharField(max_length=100)
@@ -14,6 +15,9 @@ class Page(OrderedModel):
     edited_by   = models.ForeignKey(User, blank=True, null=True)
 
     pause_at = models.DateTimeField(blank=True, null=True)
+
+    hide_top_bar        = models.BooleanField("Hide the top bar of the screen", default=False)
+    hide_bottom_bar     = models.BooleanField("Hide the bottom bar of the screen", default=False)
 
     active_time_start   = models.TimeField("Time of day to start displaying page.", default=time(0,0))
     active_time_end     = models.TimeField("Time of day to stop displaying page. ", default=time(0,0))
@@ -87,5 +91,3 @@ class Page(OrderedModel):
             self.url = '/%s'%self.url
 
         super(Page, self).save(*args, **kwargs)
-
-
