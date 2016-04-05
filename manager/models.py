@@ -21,7 +21,7 @@ class Page(OrderedModel):
 
     active_time_start   = models.TimeField("Time of day to start displaying page.", default=time(0,0))
     active_time_end     = models.TimeField("Time of day to stop displaying page. ", default=time(0,0))
-    active_date_start   = models.DateField("Date to start displayig page.", default=date.today())
+    active_date_start   = models.DateField("Date to start displaying page.", default=date.today())
     active_date_end     = models.DateField("Last date to display page.", blank=True, null=True)
 
     monday      = models.BooleanField(default=True)
