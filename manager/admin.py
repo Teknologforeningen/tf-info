@@ -17,10 +17,10 @@ class PageAdmin(OrderedModelAdmin):
     actions = ['pause', 'unpause']
 
     def pause(self, request, queryset):
-        queryset.update(paused_at=timezone.now())
+        queryset.update(pause_at=timezone.now())
 
     def unpause(self, request, queryset):
-        queryset.update(paused_at=None)
+        queryset.update(pause_at=None)
 
     def save_model(self, request, obj, form, change):
         obj.edited_by = request.user
