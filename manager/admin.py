@@ -9,6 +9,7 @@ class PageAdmin(OrderedModelAdmin):
 
     fieldsets = (
         (None, {'fields': ('url', 'duration', 'title', 'description', 'edited_by', 'pause_at')}),
+        ('Image', {'fields': ('image', 'hide_top_bar', 'hide_bottom_bar')}),
         ('Date and Time', {'fields': ('active_time_start', 'active_time_end', 'active_date_start', 'active_date_end')}),
         ('Weekdays to display', {'fields': ('monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday')})
     )
@@ -16,10 +17,10 @@ class PageAdmin(OrderedModelAdmin):
     actions = ['pause', 'unpause']
 
     def pause(self, request, queryset):
-        queryset.update(paused_at=timezone.now())
+        queryset.update(pause_at=timezone.now())
 
     def unpause(self, request, queryset):
-        queryset.update(paused_at=None)
+        queryset.update(pause_at=None)
 
     def save_model(self, request, obj, form, change):
         obj.edited_by = request.user
