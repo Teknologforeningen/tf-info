@@ -9,15 +9,10 @@ html, body {
 	overflow: hidden;
 }
 
-html {
-	padding: 5;
-}
-
 body {
 	font-family: 'Roboto', sans-serif;
 	color: #222222;
 	font-weight: 300;
-
 }
 
 .header {
@@ -25,6 +20,9 @@ body {
 	flex-shrink: 0;
 	flex-basis: 100px;
 	padding-bottom: 10px;
+	padding-top: 5px;
+	padding-left: 5px;
+	padding-right: 5px;
 	display: flex;
 	flex-direction: row;
 }
@@ -44,7 +42,10 @@ body {
 
 #content {
 	order: 2;
-	padding: 10;
+	padding-left: 15px;
+	padding-right: 15px;
+	padding-top: 10px;
+	padding-bottom: 10px;
 	height: 100%;
 	overflow: hidden;
 }
@@ -55,6 +56,9 @@ body {
 	flex-basis: 110px;
 	flex-direction: row;
 	padding-top: 10px;
+	padding-bottom: 5px;
+	padding-left: 5px;
+	padding-right: 5px;
 	background-color: white;
 	display: flex;
 }
@@ -64,7 +68,7 @@ body {
 }
 
 #footer_left {
-	padding: 0px;
+	padding: 0;
 	margin-bottom: 0;
 	margin-top: auto;
 }
