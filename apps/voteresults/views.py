@@ -31,7 +31,7 @@ class Result:
 		self.color = "#0F0F0F"
 		self.size = 0
 		self.pos = 0
-	
+
 	def add_votes(self, add_count):
 		self.count += add_count
 
@@ -81,6 +81,8 @@ def index(request):
 		elif x.id == 10:
 			x.id = 5
 			x.set_color("#FFFF00")
+		else:
+			continue #Ignore other ids
 
 		# ^ that is seriously bad code -_-'
 
