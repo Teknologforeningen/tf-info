@@ -83,6 +83,10 @@ To deploy the service to a webserver use:
 
 	$ fab deploy
 
+For first time install, run
+
+	$ fab install
+
 # Architecture
 
 The service is made up of several django apps as described below:
