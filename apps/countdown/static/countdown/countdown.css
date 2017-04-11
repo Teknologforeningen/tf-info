@@ -5,36 +5,34 @@ body{
 }
 
 h1{
-  color: #396;
-  font-weight: 100;
-  font-size: 40px;
-  margin: 40px 0px 20px;
+  color: #b11e3a;
+  font-weight: bold;
+  font-size: 10em;
+  margin: 140px 0px 20px;
 }
 
 #clockdiv{
     font-family: sans-serif;
-    color: #fff;
+    color: #b11e3a;
     display: inline-block;
-    font-weight: 100;
+    font-weight: bold;
     text-align: center;
-    font-size: 30px;
+    font-size: 6em;
 }
 
 #clockdiv > div{
     padding: 10px;
     border-radius: 3px;
-    background: #00BF96;
     display: inline-block;
 }
 
 #clockdiv div > span{
-    padding: 15px;
+    padding: 10px 70px;
     border-radius: 3px;
-    background: #00816A;
     display: inline-block;
 }
 
 .smalltext{
     padding-top: 5px;
-    font-size: 16px;
+    font-size: 0.5em;
 }
