@@ -8,7 +8,7 @@ h1{
   color: #b11e3a;
   font-weight: bold;
   font-size: 10em;
-  margin: 140px 0px 20px;
+  margin: 1em 0em 0.2em;
 }
 
 #clockdiv{
@@ -27,7 +27,7 @@ h1{
 }
 
 #clockdiv div > span{
-    padding: 10px 70px;
+    padding: 0em 0.8em;
     border-radius: 3px;
     display: inline-block;
 }
