@@ -95,6 +95,7 @@ The service is made up of several django apps as described below:
 info-reborn			- root of the project
 	apps			- apps for displaying the various pages
 		dagsen		- display lunch menu
+		countdown	- show countdown until date
 		reittiopas	- display bus schedules
 		weather		- display weather
 		weathermap	- display weathermap
@@ -116,6 +117,7 @@ A page stores the url and descriptions of the page to be displayed as well as in
 |/reittiopas/|Bus schedules        |reittiopas|
 |/calendar/  |Event calendar       |kalender  |
 |/weathermap/|Specifik weathermap  |weathermap|
+|/countdown/ |Countdown screen     |countdown |
 
 ## Page fields
 
