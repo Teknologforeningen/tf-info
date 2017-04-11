@@ -34,27 +34,28 @@ def index(request):
 			lines_dict[parts[0]] = parts[1]
 
 		# Parse departures
-		departures = []
-		for departure in stop_departures['departures']:
-			# Convert code to actual line number
-			departure['line'] = re.sub(r'^\d0*(\d?\w*) .*', r'\1',departure['code'])
+		if stop_departures['departures'] != None: # 'NoneType' object is not iterable
+			departures = []
+			for departure in stop_departures['departures']:
+				# Convert code to actual line number
+				departure['line'] = re.sub(r'^\d0*(\d?\w*) .*', r'\1',departure['code'])
 
-			departure['stop'] = stop_departures['name_fi']
+				departure['stop'] = stop_departures['name_fi']
 
-			# Add destination name to departure item
-			departure['dest'] = lines_dict[departure['code']]
+				# Add destination name to departure item
+				departure['dest'] = lines_dict[departure['code']]
 
-			# Create datetime object to sort departures by
-			if departure['time'] >= 2400:
-				departure['time'] = departure['time']-2400
-				dt = datetime.strptime('%d%d'%(departure['date'], departure['time']), "%Y%m%d%H%M")
-				departure['datetime'] = dt + timedelta(days=1)
-			else:
-				departure['datetime'] = datetime.strptime('%d%d'%(departure['date'], departure['time']), "%Y%m%d%H%M")
+				# Create datetime object to sort departures by
+				if departure['time'] >= 2400:
+					departure['time'] = departure['time']-2400
+					dt = datetime.strptime('%d%d'%(departure['date'], departure['time']), "%Y%m%d%H%M")
+					departure['datetime'] = dt + timedelta(days=1)
+				else:
+					departure['datetime'] = datetime.strptime('%d%d'%(departure['date'], departure['time']), "%Y%m%d%H%M")
 
-			departures.append(departure)
+				departures.append(departure)
 
-		all_departures = all_departures + departures
+			all_departures = all_departures + departures
 
 	sorted_departures = sorted(all_departures, key=itemgetter('datetime'))[:10]
 
