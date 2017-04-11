@@ -6,7 +6,7 @@ from django.utils import timezone
 import re
 
 class Page(OrderedModel):
-    url         = models.CharField("Url of page to display (relative to root).", max_length=90)
+    url         = models.CharField("Url of page to display (relative to root).", max_length=1024)
     image       = models.ImageField("Image to show instead of URL. If image is specified URL wont be used", upload_to="images/", null=True, blank=True)
     duration    = models.PositiveIntegerField("Duration (seconds)", default=10)
 
