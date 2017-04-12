@@ -14,7 +14,7 @@ A webservice to display info-screens around [Teknologföreningen](http://www.tek
 
 Virtualenv is not mandatory but highly recommended as it makes it much easier to keep your python projects isolated from each other.
 
-	$ pip install virtualenv
+    $ pip install virtualenv
 
 [virtualenvwrapper](http://virtualenvwrapper.readthedocs.org/en/latest/) is also a handy tool for using virtualenv.
 
@@ -24,11 +24,11 @@ Alternative ways of keeping your dev environment isolated are [Docker](https://w
 
 Clone the repository:
 
-	git clone <repository url>
+    git clone <repository url>
 
 Initialize git-flow:
 
-	git checkout master && git flow init -d
+    git checkout master && git flow init -d
 
 (If the above command fails you probably need to manually fetch the remote branch 'master')
 
@@ -38,17 +38,17 @@ The `-d` is for the default options. Git-flow needs to be initialized each time 
 
 To start using virtualenv with this project run:
 
-	$ virtualenv venv
+    $ virtualenv venv
 
 Start using the virtualenv environment with the following command:
 
-	$ source venv/bin/activate
+    $ source venv/bin/activate
 
 **This command needs to be executed each time you start working on the project to make sure you're using the Python environment specific to this project.**
 
 Now, to install all of the Python libraries required you run:
 
-	pip install -r requirements.txt
+    pip install -r requirements.txt
 
 ## Set up environment file
 
@@ -58,11 +58,11 @@ The service reads a bunch of settings from environment variables. The easiest wa
 
 To create the database:
 
-	$ python manage.py migrate
+    $ python manage.py migrate
 
 To start the development server:
 
-	$ python manage.py runserver
+    $ python manage.py runserver
 
 The service is now accessible at http://localhost:8000.
 
@@ -81,7 +81,7 @@ To load some example pages:
 
 To deploy the service to a webserver use:
 
-	$ fab deploy
+    $ fab deploy
 
 For first time install, run
 
@@ -92,15 +92,15 @@ For first time install, run
 The service is made up of several django apps as described below:
 
 ```
-info-reborn			- root of the project
-	apps			- apps for displaying the various pages
-		dagsen		- display lunch menu
-		countdown	- show countdown until date
-		reittiopas	- display bus schedules
-		weather		- display weather
-		weathermap	- display weathermap
-	config 			- project configurations
-	manager			- app to manage the info screen pages and users
+info-reborn         - root of the project
+    apps            - apps for displaying the various pages
+        dagsen      - display lunch menu
+        countdown   - show countdown until date
+        reittiopas  - display bus schedules
+        weather     - display weather
+        weathermap  - display weathermap
+    config          - project configurations
+    manager         - app to manage the info screen pages and users
 ```
 
 # Usage

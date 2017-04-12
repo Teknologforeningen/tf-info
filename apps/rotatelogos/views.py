@@ -19,7 +19,7 @@ def get_logo(request, index):
     all_entries = Logo.objects.all().order_by("id")
 
     if len(all_entries) == 0:
-    	return HttpResponseNotFound()
+        return HttpResponseNotFound()
 
     if i >= len(all_entries):
         i = 0

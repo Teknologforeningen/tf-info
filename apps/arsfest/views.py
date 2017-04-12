@@ -12,4 +12,4 @@ minutes = 30
 
 @cache_page(60 * minutes)
 def index(request):
-	return render_to_response('arsfest/index.html', context_instance=RequestContext(request))
+    return render_to_response('arsfest/index.html', context_instance=RequestContext(request))

@@ -5,7 +5,7 @@ from django.utils import timezone
 
 class PageTestCase(TestCase):
     def setUp(self):
-    	now = timezone.now()
+        now = timezone.now()
         Page.objects.create(url="testurl", description="test description")
 
     def test_regular_page_active(self):
