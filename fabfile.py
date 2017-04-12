@@ -19,7 +19,7 @@ def test():
     if result.failed and not confirm("Tests failed, continue anyway?"):
         abort("Aborting at user request.")
 
-def install(commit):
+def setup_django(commit, first_install):
   with cd(env.project_dir):
     sudo('tar xvf /tmp/%s.tar'%commit, user=env.www_user)
     sudo('rm /tmp/%s.tar'%commit)
@@ -28,9 +28,12 @@ def install(commit):
       sudo('pip install -r requirements.txt', user=env.www_user)
       sudo('python manage.py collectstatic --noinput', user=env.www_user)
       sudo('python manage.py migrate', user=env.www_user)
-      sudo('python manage.py loaddata fixtures', user=env.www_user)
+      if first_install:
+        sudo('python manage.py loaddata fixtures', user=env.www_user)
 
-  sudo('a2ensite %s'%env.project_name)
+  if first_install:
+    sudo('a2ensite %s'%env.project_name)
+
   sudo('apache2ctl configtest')
   sudo('apache2ctl graceful')
 
@@ -39,7 +42,16 @@ def transfer(commit):
   put('%s.tar'%commit, '/tmp/')
   local('rm %s.tar'%commit)
 
-def deploy(commit=None):
+def install():
+  puts("This is for first time setup and will import example data, and create web configs.")
+  puts("If you want to update an existing installation, run: fab deploy")
+  if confirm("Do you really want to perform first time setup?"):
+    deploy(None, True)
+  else:
+    abort("Aborting at user request.")
+
+
+def deploy(commit=None, first_install=False): # Deploy should not be first install if ran from command line.
   if commit == None:
     commit = local('git rev-parse --abbrev-ref HEAD', capture=True)
     puts('Deploying current branch: %s'%commit)
@@ -47,4 +59,4 @@ def deploy(commit=None):
   check_uncommitted_changes()
   test()
   transfer(commit)
-  install(commit)
+  setup_django(commit, first_install)
