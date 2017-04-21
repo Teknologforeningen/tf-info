@@ -15,7 +15,7 @@ def index(request, year, month, day, hour, text):
 		'month': int(month) - 1, #JS takes months in retarded format...
 		'day': day,
 		'text': text,
-		'hour': int(hour) - 1 #JS also takes hours in retarded format...
+		'hour': int(hour)
 	}
 
 	return render_to_response('countdown/index.html', params, context_instance=RequestContext(request))
