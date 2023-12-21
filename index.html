@@ -8,13 +8,15 @@
     <link href="//fonts.googleapis.com/css?family=Roboto:400,500,900,300italic,300,100,100italic" rel="stylesheet"
         type="text/css">
     <link href="style.css" rel="stylesheet">
-    <script src="script.js" type="module"></script>
 </head>
 
 <body>
     <header>
         <img src="static/tf-logo.jpg" alt="TF" width="63px" height="63px" />
-        <p class="clock">Clock</p>
+        <p id="clock">
+            <span id="time"></span>
+            <span id="date"></span>
+        </p>
     </header>
     <main>
         <div class="main-row">
@@ -28,6 +30,8 @@
     </main>
     <footer>
     </footer>
+    <script src="script.js"></script>
+    <script src="clock.js"></script>
 </body>
 
 </html>
