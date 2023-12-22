@@ -1,0 +1,3 @@
+<div id="ipcam">
+    <img src="<%= it.cam %>">
+</div>

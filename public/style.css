@@ -1,0 +1,101 @@
+/* TODO: Use modern browser features when target browser is newer */
+
+body {
+    font-family: 'Roboto', sans-serif;
+    font-weight: 300;
+    background-color: #fefefe;
+    color: #202020;
+    height: 100vh;
+    width: 98vw;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    padding: 1rem 0;
+}
+
+header {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+
+main {
+    height: 100%;
+    max-height: 100%;
+    overflow: hidden;
+    display: flex;
+    padding: 0 2rem;
+}
+
+.main-col {
+    height: 100%;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+#clock {
+    display: flex;
+    flex-direction: column;
+    text-align: right;
+    line-height: 1;
+}
+
+#time {
+    font-size: 5rem;
+}
+
+#date {
+    font-size: 3rem;
+}
+
+#pi-temp {
+    font-size: 3rem;
+}
+
+#ipcam {
+    flex: 60;
+    max-height: 60%;
+    width: fit-content;
+    align-self: center;
+}
+
+#ipcam img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+#dagsen-menu {
+    width: 50%;
+    padding: 0 2rem;
+}
+
+#dagsen-menu h2 {
+    font-size: 3vw;
+    font-weight: 300;
+}
+
+#dagsen-menu li {
+    list-style-type: none;
+    font-size: 2vw;
+}
+
+.alacarte {
+    flex: 40;
+    text-align: center;
+    align-self: center;
+    padding: 1rem;
+    line-height: 1;
+}
+
+.alacarte * {
+    font-size: 5vh;
+    font-weight: 500;
+}
+
+#alacarte-num {
+    color: #b11e3a;
+    font-size: 15vh;
+    font-weight: 700;
+}

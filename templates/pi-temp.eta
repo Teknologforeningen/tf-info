@@ -1,0 +1,3 @@
+<div id="pi-temp">
+    <span><%= it.piTemp %>&#8451; &#64;&pi;</span>
+</div>

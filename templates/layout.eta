@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="sv">
+
+<head>
+    <title>Teknologföreningen</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://fonts.googleapis.com/css?family=Roboto:400,500,900,300italic,300,100,100italic" rel="stylesheet"
+        type="text/css">
+    <link href="/static/reset.css" rel="stylesheet">
+    <link href="/static/style.css" rel="stylesheet">
+    <script src="/static/scripts/clock.js" defer></script>
+</head>
+
+<body>
+    <%~ it.body %>
+</body>
+
+</html>
