@@ -1,25 +1,3 @@
 <% layout("./layout.eta") %>
+<%~ include("./dagsen.eta", it) %>
 
-    <header>
-        <img src="/static/tf-logo.jpg" alt="TF" width="63px" height="63px" />
-        <% if (it.piTemp > 35) { %>
-        <%~ include("./pi-temp.eta", { piTemp: it.piTemp }) %>
-        <% } %>
-        <p id="clock">
-            <span id="time"></span>
-            <span id="date"></span>
-        </p>
-    </header>
-    <main>
-        <div class="main-col">
-            <%~ include('./ipcam.eta', { cam: it.cam }) %>
-            <% if (it.alacarte) { %>
-            <%~ include("./alacarte.eta", { alacarte: it.alacarte }) %>
-            <% } %>
-        </div>
-        <div class="main-col">
-            <%~ include("./dagsen-menu.eta", { menu: it.menu }) %>
-        </div>
-    </main>
-    <footer>
-    </footer>
