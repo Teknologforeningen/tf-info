@@ -1,8 +1,11 @@
+import "https://deno.land/std@0.210.0/dotenv/load.ts";
 import { serveDir } from "https://deno.land/std@0.207.0/http/file_server.ts";
 import { Eta } from "https://deno.land/x/eta@v3.1.0/src/index.ts";
 import { fetchAlaCarte, fetchMenu } from "./dagsen.ts";
 
-const CAM_URL = "https://info.teknolog.fi/snapshot.jpg";
+const {
+  CAM_URL,
+} = Deno.env.toObject();
 
 const templatePath = Deno.cwd() + "/templates/";
 const eta = new Eta({ views: templatePath });
