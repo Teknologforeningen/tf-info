@@ -3,21 +3,17 @@
     <h1>Tid till Ylonz</h1>
     <div id="countdown">
         <div>
-            <span id="countdown-days"></span>
-            <p>Dagar</p>
+            <span><span id="countdown-days"></span> Dagar&nbsp;</span>
+        </div>
         <div>
+            <span><span id="countdown-hours"></span> Timmar&nbsp;</span>
+        </div>
         <div>
-            <span id="countdown-hours"></span>
-            <p>Timmar</p>
+            <span><span id="countdown-minutes"></span> Minuter&nbsp;</span>
+        </div>
         <div>
-        <div>
-            <span id="countdown-minutes"></span>
-            <p>Minuter</p>
-        <div>
-        <div>
-            <span id="countdown-seconds"></span>
-            <p>Sekunder</p>
-        <div>
+            <span><span id="countdown-seconds"></span> Sekunder</span>
+        </div>
     </div>
 </div>
 

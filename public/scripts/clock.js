@@ -8,8 +8,8 @@ function updateClock(now) {
     const time = now.toLocaleTimeString('sv')
     const date = now.toLocaleDateString('de')
 
-    timeElement.innerText = time
-    dateElement.innerText = date
+    timeElement.textContent = time
+    dateElement.textContent = date
 }
 
 updateClock(new Date())

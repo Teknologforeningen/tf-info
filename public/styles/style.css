@@ -54,7 +54,6 @@ main {
 }
 
 #ipcam {
-    flex: 60;
     max-height: 60%;
     width: fit-content;
     align-self: center;
@@ -82,7 +81,6 @@ main {
 }
 
 .alacarte {
-    flex: 40;
     text-align: center;
     align-self: center;
     padding: 1rem;

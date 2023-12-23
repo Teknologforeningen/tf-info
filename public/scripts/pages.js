@@ -8,9 +8,9 @@ async function changePage() {
     return;
   }
 
-  const page = await fetch(`/pages/${pagesIter.next().value}`)
+  const pageId = pagesIter.next().value
+  const page = await fetch(`/pages/${pageId}`)
     .then((res) => res.text());
-
   main.innerHTML = page;
 
   setTimeout(changePage, 5000);

@@ -37,10 +37,10 @@ function countdown(now) {
 
   const timeLeft = timeBetween(now, ylonzTime);
 
-  ylonz.querySelector("#countdown-days").innerHTML = timeLeft.days;
-  ylonz.querySelector("#countdown-hours").innerHTML = timeLeft.hours;
-  ylonz.querySelector("#countdown-minutes").innerHTML = timeLeft.minutes;
-  ylonz.querySelector("#countdown-seconds").innerHTML = timeLeft.seconds;
+  ylonz.querySelector("#countdown-days").textContent = timeLeft.days;
+  ylonz.querySelector("#countdown-hours").textContent = timeLeft.hours;
+  ylonz.querySelector("#countdown-minutes").textContent = timeLeft.minutes;
+  ylonz.querySelector("#countdown-seconds").textContent = timeLeft.seconds;
 }
 
 setInterval(() => countdown(new Date()), 1000);

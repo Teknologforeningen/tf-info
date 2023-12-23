@@ -1,0 +1,27 @@
+#ylonz {
+    flex: 1;
+    text-align: center;
+}
+
+#ylonz>h1 {
+    color: #b11e3a;
+    font-weight: bold;
+    text-transform: uppercase;
+    font-size: 10em;
+}
+
+#countdown {
+    font-family: sans-serif;
+    color: #b11e3a;
+    font-weight: bold;
+    text-align: center;
+
+    padding-top: 1rem;
+
+    display: flex;
+    justify-content: center;
+}
+
+#countdown * {
+    font-size: 3rem;
+}
