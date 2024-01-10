@@ -5,9 +5,9 @@ import { fetchAlaCarte, fetchMenu, Menu } from "./dagsen.ts";
 
 // TODO: Make page refresh at night
 
-const {
-  CAM_URL,
-} = Deno.env.toObject();
+const { CAM_URL, YLONZ_DATE, REFRESH_TIME = "14:00" } = Deno.env.toObject();
+
+const ylonzDate = new Date(YLONZ_DATE);
 
 const templatePath = Deno.cwd() + "/templates/";
 const eta = new Eta({ views: templatePath });
@@ -26,7 +26,7 @@ async function handler(req: Request): Promise<Response> {
     });
   }
 
-  const renderData = await fetchRenderData()
+  const renderData = await fetchRenderData();
 
   const pageMatch = PAGE_ROUTE.exec(req.url);
   if (pageMatch) {
@@ -64,6 +64,8 @@ type RenderData = {
   menu: Menu | null;
   alacarte: string | null;
   cam: typeof CAM_URL;
+  ylonzDate: Date;
+  secondsUntilRefresh: number;
 };
 
 async function fetchRenderData(): Promise<RenderData> {
@@ -78,5 +80,24 @@ async function fetchRenderData(): Promise<RenderData> {
     menu: res[1],
     alacarte: res[2],
     cam: CAM_URL,
+    ylonzDate,
+    secondsUntilRefresh: calculateSecondsUntilRefresh(new Date(), REFRESH_TIME),
   };
+}
+
+/**
+ * @param refreshTime time in format of HH:MM
+ */
+function calculateSecondsUntilRefresh(now: Date, refreshTime: string): number {
+  const [hours, minutes] = refreshTime.split(":");
+  const refreshDate = new Date(now);
+  refreshDate.setHours(parseInt(hours), parseInt(minutes));
+
+  // Page should be updated 'today'
+  if (now.getTime() < refreshDate.getTime()) {
+    return (refreshDate.getTime() - now.getTime()) / 1000;
+  }
+
+  refreshDate.setDate(now.getDate() + 1);
+  return (refreshDate.getTime() - now.getTime()) / 1000;
 }
