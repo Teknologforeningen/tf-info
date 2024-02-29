@@ -3,9 +3,12 @@ import { serveDir } from "https://deno.land/std@0.207.0/http/file_server.ts";
 import { Eta } from "https://deno.land/x/eta@v3.1.0/src/index.ts";
 import { fetchAlaCarte, fetchMenu, Menu } from "./dagsen.ts";
 
-// TODO: Make page refresh at night
-
-const { CAM_URL, YLONZ_DATE, REFRESH_TIME = "14:00" } = Deno.env.toObject();
+const {
+  CAM_URL,
+  YLONZ_DATE,
+  PAGE_TIMEOUT = 10000,
+  REFRESH_TIME = "14:00",
+} = Deno.env.toObject();
 
 const ylonzDate = new Date(YLONZ_DATE);
 
@@ -14,6 +17,11 @@ const eta = new Eta({ views: templatePath });
 
 const PAGE_ROUTE = new URLPattern({ pathname: "/pages/:id" });
 
+type Page = {
+  id: string;
+  timeout: number;
+  html: string;
+};
 const PAGES = ["countdown", "dagsen"];
 
 async function handler(req: Request): Promise<Response> {
@@ -30,16 +38,21 @@ async function handler(req: Request): Promise<Response> {
 
   const pageMatch = PAGE_ROUTE.exec(req.url);
   if (pageMatch) {
-    const page = pageMatch.pathname.groups.id ?? "";
+    const pageId = pageMatch.pathname.groups.id ?? "";
 
-    if (!PAGES.includes(page)) {
+    if (!PAGES.includes(pageId)) {
       return new Response("Page not found", { status: 404 });
     }
 
-    const body = await eta.renderAsync(page, renderData);
-    return new Response(body, {
-      headers: new Headers({ "Content-Type": "text/html" }),
-    });
+    const html = await eta.renderAsync(pageId, renderData);
+
+    const page: Page = {
+      id: pageId,
+      timeout: PAGE_TIMEOUT as number,
+      html,
+    };
+
+    return Response.json(page);
   }
   if (pathname.startsWith("/pages")) {
     return Response.json(PAGES);
