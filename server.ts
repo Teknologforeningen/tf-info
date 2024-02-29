@@ -20,9 +20,10 @@ const PAGE_ROUTE = new URLPattern({ pathname: "/pages/:id" });
 type Page = {
   id: string;
   timeout: number;
+  nextPage: string;
   html: string;
 };
-const PAGES = ["countdown", "dagsen"];
+const PAGES = ["dagsen", "countdown"];
 
 async function handler(req: Request): Promise<Response> {
   const pathname = new URL(req.url).pathname;
@@ -38,16 +39,22 @@ async function handler(req: Request): Promise<Response> {
 
   const pageMatch = PAGE_ROUTE.exec(req.url);
   if (pageMatch) {
-    const pageId = pageMatch.pathname.groups.id ?? "";
+    let pageId = pageMatch.pathname.groups.id ?? "";
 
     if (!PAGES.includes(pageId)) {
-      return new Response("Page not found", { status: 404 });
+      const pageNumber = parseInt(pageId);
+      if (0 <= pageNumber && pageNumber < PAGES.length) {
+        pageId = PAGES[pageNumber];
+      } else {
+        return new Response("Page not found", { status: 404 });
+      }
     }
 
     const html = await eta.renderAsync(pageId, renderData);
 
     const page: Page = {
       id: pageId,
+      nextPage: nextPage(pageId),
       timeout: PAGE_TIMEOUT as number,
       html,
     };
@@ -113,4 +120,10 @@ function calculateSecondsUntilRefresh(now: Date, refreshTime: string): number {
 
   refreshDate.setDate(now.getDate() + 1);
   return (refreshDate.getTime() - now.getTime()) / 1000;
+}
+
+function nextPage(currentPage: Page["id"]): Page["id"] {
+  const pagesLength = PAGES.length;
+  const nextIndex = PAGES.indexOf(currentPage) + 1;
+  return PAGES[nextIndex % pagesLength];
 }

@@ -1,18 +1,13 @@
 const main = document.getElementById("main");
 
-/** @type {Generator<number, never, never>} */
-let pagesIter;
+let nextPage;
 
 async function changePage() {
-  if (!pagesIter) {
-    return;
-  }
-
-  const pageId = pagesIter.next().value;
   let timeout = 10000;
   try {
-    const page = await fetch(`/pages/${pageId}`)
+    const page = await fetch(`/pages/${nextPage ?? 0}`)
       .then((res) => res.json());
+    nextPage = page.nextPage;
     timeout = page.timeout;
     main.innerHTML = page.html;
   } catch (e) {
@@ -21,18 +16,4 @@ async function changePage() {
   setTimeout(changePage, timeout);
 }
 
-fetch("/pages")
-  .then((res) => res.json())
-  .then((p) => {
-    const length = p.length;
-    function* pages() {
-      let count = 0;
-      while (true) {
-        const index = count % length;
-        yield p[index];
-        count++;
-      }
-    }
-    pagesIter = pages();
-  })
-  .then(() => changePage());
+changePage();
