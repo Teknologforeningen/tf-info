@@ -1,5 +1,5 @@
 <div id="ylonz">
-    <time id="ylonz-time" datetime="2024-04-20T10:00:00.000Z"></time>
+    <time id="ylonz-time" datetime="<%= it.ylonzDate %>"></time>
     <h1>Tid till Ylonz</h1>
     <div id="countdown">
         <div>
