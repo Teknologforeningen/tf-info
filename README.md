@@ -16,4 +16,4 @@ Required environmental variables can be found in `main.ts`.
 
 The server can be ran with the following command:
 
-`deno run --allow-env --allow-read --allow-net --unstable main.ts`
+`deno run --allow-env --allow-read --allow-net main.ts`
