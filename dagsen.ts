@@ -15,7 +15,7 @@ export async function fetchMenu(
     const res = await fetch(`http://api.teknolog.fi/taffa/sv/json/${day}`);
     return res.json();
   } catch (e) {
-    console.error("Failed to fetch menu from lunch API.", e);
+    console.error("Failed to fetch menu from lunch API:", e);
     return null;
   }
 }
@@ -33,7 +33,7 @@ export async function fetchAlaCarte(): Promise<string | null> {
     const alacarte = await res.json();
     return isNaN(parseInt(alacarte)) ? null : alacarte;
   } catch (e) {
-    console.error("Failed to fetch Á la carte from lunch API.", e);
+    console.error("Failed to fetch Á la carte from lunch API:", e);
     return null;
   }
 }

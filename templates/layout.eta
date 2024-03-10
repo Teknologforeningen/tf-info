@@ -18,7 +18,7 @@
 
 <header>
     <img src="/static/tf-logo.jpg" alt="TF" width="63px" height="63px" />
-    <% if (it.piTemp> 35) { %>
+    <% if (it.piTemp && it.piTemp > 35) { %>
         <%~ include("./pi-temp.eta", { piTemp: it.piTemp }) %>
             <% } %>
                 <p id="clock">

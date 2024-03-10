@@ -87,13 +87,18 @@ async function handler(req: Request): Promise<Response> {
 
 Deno.serve(handler);
 
-async function fetchPiTemp(): Promise<number> {
-  const res = await fetch("https://mask.tf.fi/data/pi/temperature");
-  return res.json();
+async function fetchPiTemp(): Promise<number | null> {
+  try {
+    const res = await fetch("https://mask.tf.fi/data/pi/temperature");
+    return res.json();
+  } catch (e: unknown) {
+    console.error("Failed to fetch pi temp:", e);
+    return null;
+  }
 }
 
 type RenderData = {
-  piTemp: number;
+  piTemp: number | null;
   menu: Menu | null;
   alacarte: string | null;
   cam: typeof CAM_URL;
