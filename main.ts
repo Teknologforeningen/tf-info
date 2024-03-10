@@ -2,6 +2,8 @@ import "https://deno.land/std@0.210.0/dotenv/load.ts";
 import { serveDir } from "https://deno.land/std@0.207.0/http/file_server.ts";
 import { Eta } from "https://deno.land/x/eta@v3.1.0/src/index.ts";
 import { fetchAlaCarte, fetchMenu, Menu } from "./dagsen.ts";
+import { Page } from "./page.ts";
+import { createPage } from "./page.ts";
 
 const {
   CAM_URL,
@@ -17,13 +19,20 @@ const eta = new Eta({ views: templatePath });
 
 const PAGE_ROUTE = new URLPattern({ pathname: "/pages/:id" });
 
-type Page = {
+type PageResponse = {
   id: string;
   timeout: number;
   nextPage: string;
   html: string;
 };
-const PAGES = ["dagsen", "countdown"];
+
+const PAGES: readonly Page[] = [
+  createPage("dagsen"),
+  createPage(
+    "countdown",
+    () => !isNaN(ylonzDate.getTime()) && ylonzDate.getTime() > Date.now(),
+  ),
+] as const;
 
 async function handler(req: Request): Promise<Response> {
   const pathname = new URL(req.url).pathname;
@@ -37,14 +46,17 @@ async function handler(req: Request): Promise<Response> {
 
   const renderData = await fetchRenderData();
 
+  const pages = PAGES
+    .filter((p) => p.condition())
+    .map((p) => p.id);
+
   const pageMatch = PAGE_ROUTE.exec(req.url);
   if (pageMatch) {
     let pageId = pageMatch.pathname.groups.id ?? "";
-
-    if (!PAGES.includes(pageId)) {
+    if (!pages.includes(pageId)) {
       const pageNumber = parseInt(pageId);
-      if (0 <= pageNumber && pageNumber < PAGES.length) {
-        pageId = PAGES[pageNumber];
+      if (0 <= pageNumber && pageNumber < pages.length) {
+        pageId = pages[pageNumber];
       } else {
         return new Response("Page not found", { status: 404 });
       }
@@ -52,17 +64,18 @@ async function handler(req: Request): Promise<Response> {
 
     const html = await eta.renderAsync(pageId, renderData);
 
-    const page: Page = {
+    const page: PageResponse = {
       id: pageId,
-      nextPage: nextPage(pageId),
+      nextPage: nextPage(pages, pageId),
       timeout: PAGE_TIMEOUT as number,
       html,
     };
 
     return Response.json(page);
   }
+
   if (pathname.startsWith("/pages")) {
-    return Response.json(PAGES);
+    return Response.json(pages);
   }
 
   const body = await eta.renderAsync("index", renderData);
@@ -122,8 +135,11 @@ function calculateSecondsUntilRefresh(now: Date, refreshTime: string): number {
   return (refreshDate.getTime() - now.getTime()) / 1000;
 }
 
-function nextPage(currentPage: Page["id"]): Page["id"] {
-  const pagesLength = PAGES.length;
-  const nextIndex = PAGES.indexOf(currentPage) + 1;
-  return PAGES[nextIndex % pagesLength];
+function nextPage(
+  pages: readonly string[],
+  currentPage: PageResponse["id"],
+): PageResponse["id"] {
+  const pagesLength = pages.length;
+  const nextIndex = pages.indexOf(currentPage) + 1;
+  return pages[nextIndex % pagesLength];
 }
