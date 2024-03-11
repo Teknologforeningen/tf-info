@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="sv">
+
+<head>
+    <title>Teknologföreningen</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="refresh" content="<%= it.secondsUntilRefresh %>">
+    <link href="https://fonts.googleapis.com/css?family=Roboto:400,500,900,300italic,300,100,100italic" rel="stylesheet"
+        type="text/css">
+    <link href="/static/styles/reset.css" rel="stylesheet">
+    <link href="/static/styles/style.css" rel="stylesheet">
+    <link href="/static/styles/countdown.css" rel="stylesheet">
+    <script src="/static/scripts/clock.js" defer></script>
+    <script src="/static/scripts/pages.js" defer></script>
+    <script src="/static/scripts/countdown.js" defer></script>
+</head>
+
+<header>
+    <img src="/static/tf-logo.jpg" alt="TF" width="63px" height="63px" />
+    <% if (it.piTemp && it.piTemp > 35) { %>
+        <%~ include("./pi-temp.eta", { piTemp: it.piTemp }) %>
+            <% } %>
+                <p id="clock">
+                    <span id="time"></span>
+                    <span id="date"></span>
+                </p>
+</header>
+
+<body>
+    <main id="main">
+        <%~ it.body %>
+    </main>
+</body>
+
+<footer>
+
+</footer>
+
+</html>
