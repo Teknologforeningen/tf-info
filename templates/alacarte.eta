@@ -1,0 +1,4 @@
+<div class="alacarte">
+    <h3><strong>À la carte</strong></h3>
+    <div id="alacarte-num">&rarr;<%= it.alacarte %></div>
+</div>

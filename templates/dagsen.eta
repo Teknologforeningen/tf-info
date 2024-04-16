@@ -1,0 +1,9 @@
+<div class="main-col">
+    <%~ include('./ipcam.eta', { cam: it.cam }) %>
+    <% if (it.alacarte) { %>
+    <%~ include("./alacarte.eta", { alacarte: it.alacarte }) %>
+    <% } %>
+</div>
+<div class="main-col">
+    <%~ include("./dagsen-menu.eta", { menu: it.menu }) %>
+</div>

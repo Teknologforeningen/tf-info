@@ -1,0 +1,13 @@
+<ul id="dagsen-menu">
+    <h2><%= it.menu?.dayname %></h2>
+    <% if (it.menu?.main || it.menu?.vegetarian) { %>
+    <li><%= it.menu?.main %></li>
+    <li><%= it.menu?.vegetarian %></li>
+    <li><%= it.menu?.salad %></li>
+    <li><%= it.menu?.soup %></li>
+    <li><%= it.menu?.alacarte %></li>
+    <% } %>
+    <% if (it.menu?.extra) { %>
+    <li><%= it.menu?.extra %></li>
+    <% } %>
+</ul>
