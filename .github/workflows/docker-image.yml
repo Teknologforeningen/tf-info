@@ -2,8 +2,6 @@ name: Docker Image CI
 
 on:
   push:
-    branches: ["develop", "docker-ci"]
-  pull_request:
     branches: ["develop"]
 
 env:
@@ -28,7 +26,7 @@ jobs:
           password: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Build the Docker image
-        run: docker build . --file Dockerfile --tag ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:test
+        run: docker build . --file Dockerfile --tag ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:latest
 
       - name: Push the Docker image
-        run: docker push ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:test
+        run: docker push ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:latest
