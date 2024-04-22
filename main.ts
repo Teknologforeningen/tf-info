@@ -4,12 +4,13 @@ import { Eta } from "https://deno.land/x/eta@v3.1.0/src/index.ts";
 import { fetchAlaCarte, fetchMenu, Menu } from "./dagsen.ts";
 import { Page } from "./page.ts";
 import { createPage } from "./page.ts";
+import { helsinkiDate } from "./date.ts";
 
 const {
   CAM_URL,
   YLONZ_DATE,
   PAGE_TIMEOUT = 10000,
-  REFRESH_TIME = "14:00",
+  REFRESH_TIME = "04:00",
 } = Deno.env.toObject();
 
 const ylonzDate = new Date(YLONZ_DATE);
@@ -119,7 +120,10 @@ async function fetchRenderData(): Promise<RenderData> {
     alacarte: res[2],
     cam: CAM_URL,
     ylonzDate,
-    secondsUntilRefresh: calculateSecondsUntilRefresh(new Date(), REFRESH_TIME),
+    secondsUntilRefresh: calculateSecondsUntilRefresh(
+      helsinkiDate(),
+      REFRESH_TIME,
+    ),
   };
 }
 

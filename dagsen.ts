@@ -1,3 +1,5 @@
+import { helsinkiDate } from "./date.ts";
+
 export type Menu = {
   dayname: string;
   main?: string;
@@ -9,7 +11,7 @@ export type Menu = {
 };
 
 export async function fetchMenu(
-  day: 0 | 1 = dayNumber(new Date()),
+  day: 0 | 1 = dayNumber(helsinkiDate()),
 ): Promise<Menu | null> {
   try {
     const res = await fetch(`http://api.teknolog.fi/taffa/sv/json/${day}`);
