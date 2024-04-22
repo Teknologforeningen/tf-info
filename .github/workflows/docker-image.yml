@@ -28,7 +28,7 @@ jobs:
           password: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Build the Docker image
-        run: docker build . --file Dockerfile --tag ${{ env.registry }}/${{ env.IMAGE_NAME }}:test
+        run: docker build . --file Dockerfile --tag ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:test
 
       - name: Push the Docker image
-        run: docker push ${{ env.registry }}/${{ env.IMAGE_NAME }}:test
+        run: docker push ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:test
