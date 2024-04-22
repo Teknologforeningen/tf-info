@@ -9,6 +9,7 @@ import { helsinkiDate } from "./date.ts";
 const {
   CAM_URL,
   YLONZ_DATE,
+  VOTES_URL,
   PAGE_TIMEOUT = 10000,
   REFRESH_TIME = "04:00",
 } = Deno.env.toObject();
@@ -112,6 +113,7 @@ type RenderData = {
   cam: typeof CAM_URL;
   ylonzDate: Date;
   secondsUntilRefresh: number;
+  votes: typeof VOTES_URL;
 };
 
 async function fetchRenderData(): Promise<RenderData> {
@@ -126,6 +128,7 @@ async function fetchRenderData(): Promise<RenderData> {
     menu: res[1],
     alacarte: res[2],
     cam: CAM_URL,
+    votes: VOTES_URL,
     ylonzDate,
     secondsUntilRefresh: calculateSecondsUntilRefresh(
       helsinkiDate(),

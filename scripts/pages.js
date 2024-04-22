@@ -1,4 +1,5 @@
 const main = document.getElementById("main");
+const event = new Event("refresh");
 
 let nextPage;
 
@@ -10,6 +11,7 @@ async function changePage() {
     nextPage = page.nextPage;
     timeout = page.timeout;
     main.innerHTML = page.html;
+    main.dispatchEvent(event);
   } catch (e) {
     console.error("failed to fetch page", e);
   }

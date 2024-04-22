@@ -98,3 +98,7 @@ main {
     font-size: 12vh;
     font-weight: 700;
 }
+
+#votes {
+    width: 100%;
+}
