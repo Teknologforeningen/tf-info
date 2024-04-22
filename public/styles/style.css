@@ -17,7 +17,7 @@ header {
     width: 100%;
     display: flex;
     justify-content: space-between;
-    padding-bottom: 5rem;
+    padding-bottom: 1rem;
 }
 
 main {
@@ -25,7 +25,7 @@ main {
     max-height: 100%;
     overflow: hidden;
     display: flex;
-    padding: 0 2rem;
+    padding: 0 1rem;
 }
 
 .main-col {
@@ -55,7 +55,7 @@ main {
 }
 
 #ipcam {
-    max-height: 60%;
+    max-height: 70%;
     width: fit-content;
     align-self: center;
 }
@@ -68,7 +68,7 @@ main {
 
 #dagsen-menu {
     width: 100%;
-    padding-left: 2rem;
+    padding: 1rem;
 }
 
 #dagsen-menu h2 {
@@ -95,6 +95,6 @@ main {
 
 #alacarte-num {
     color: #b11e3a;
-    font-size: 15vh;
+    font-size: 12vh;
     font-weight: 700;
 }
