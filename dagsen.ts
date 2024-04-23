@@ -24,7 +24,7 @@ export async function fetchMenu(
 
 function dayNumber(now: Date): 0 | 1 {
   const weekday = now.getDay();
-  return 0 < weekday && weekday < 6 && now.getHours() > 15 ? 1 : 0;
+  return 0 < weekday && weekday < 6 && now.getHours() >= 15 ? 1 : 0;
 }
 
 export async function fetchAlaCarte(): Promise<string | null> {
