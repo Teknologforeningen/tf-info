@@ -53,12 +53,14 @@ async function handler(req: Request): Promise<Response> {
   const pageMatch = PAGE_ROUTE.exec(req.url);
   if (pageMatch) return pageHandler(pages, pageMatch);
 
-  const renderData = await fetchRenderData(pages, "");
-
   switch (pathname) {
     case "/pi-temp": {
-      const html = await eta.renderAsync("pi-temp", renderData);
-      return new Response(html);
+      const html = await eta.renderAsync("pi-temp", {
+        piTemp: await fetchPiTemp(),
+      });
+      return new Response(html, {
+        headers: new Headers({ "Content-Type": "text/html" }),
+      });
     }
   }
 
@@ -66,8 +68,8 @@ async function handler(req: Request): Promise<Response> {
     return Response.json(pages);
   }
 
+  const renderData = await fetchRenderData(pages, "");
   const body = await eta.renderAsync("index", renderData);
-
   return new Response(body, {
     headers: new Headers({ "Content-Type": "text/html" }),
   });
@@ -86,7 +88,9 @@ async function pageHandler(
 
   const renderData = await fetchRenderData(pages, pageId);
   const html = await eta.renderAsync(pageId, renderData);
-  return new Response(html);
+  return new Response(html, {
+    headers: new Headers({ "Content-Type": "text/html" }),
+  });
 }
 
 async function fetchPiTemp(): Promise<number | null> {
