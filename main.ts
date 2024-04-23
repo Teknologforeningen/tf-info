@@ -79,14 +79,9 @@ async function pageHandler(
   pages: readonly string[],
   match: URLPatternResult,
 ): Promise<Response> {
-  let pageId = match.pathname.groups.id ?? "";
+  const pageId = match.pathname.groups.id ?? "";
   if (!pages.includes(pageId)) {
-    const pageNumber = parseInt(pageId);
-    if (0 <= pageNumber && pageNumber < pages.length) {
-      pageId = pages[pageNumber];
-    } else {
-      return new Response("Page not found", { status: 404 });
-    }
+    return new Response("Page not found", { status: 404 });
   }
 
   const renderData = await fetchRenderData(pages, pageId);
