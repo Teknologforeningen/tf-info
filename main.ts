@@ -132,7 +132,7 @@ async function fetchRenderData(
     piTemp: res[0],
     menu: res[1],
     alacarte: res[2],
-    cam: CAM_URL,
+    cam: `${CAM_URL}?${Date.now()}`,
     votes: VOTES_URL,
     ylonzDate,
     secondsUntilRefresh: calculateSecondsUntilRefresh(
