@@ -5,7 +5,7 @@ COPY .swcrc .
 COPY scripts ./scripts
 
 RUN apk add swc && \
-    swc compile --config-file .swcrc --out-dir . scripts
+    swc compile --config-file .swcrc --ignore scripts/htmx.min.js --out-dir . scripts
 
 FROM denoland/deno:alpine-1.41.0
 EXPOSE 8000

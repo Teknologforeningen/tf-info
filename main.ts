@@ -47,6 +47,13 @@ async function handler(req: Request): Promise<Response> {
 
   const renderData = await fetchRenderData();
 
+  switch (pathname) {
+    case "/pi-temp": {
+      const html = await eta.renderAsync("pi-temp", renderData);
+      return new Response(html);
+    }
+  }
+
   const pages = PAGES
     .filter((p) => p.condition())
     .map((p) => p.id);
@@ -91,7 +98,7 @@ Deno.serve(handler);
 async function fetchPiTemp(): Promise<number | null> {
   try {
     const res = await fetch("https://mask.tf.fi/data/pi/temperature");
-    return res.json();
+    return Math.round(await res.json());
   } catch (e: unknown) {
     console.error("Failed to fetch pi temp:", e);
     return null;
