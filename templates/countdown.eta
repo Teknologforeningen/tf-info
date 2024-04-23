@@ -1,19 +1,20 @@
-<div id="ylonz">
-    <time id="ylonz-time" datetime="<%= it.ylonzDate %>"></time>
-    <h1>Tid till Ylonz</h1>
-    <div id="countdown">
-        <div>
-            <span><span id="countdown-days"></span> Dagar&nbsp;</span>
-        </div>
-        <div>
-            <span><span id="countdown-hours"></span> Timmar&nbsp;</span>
-        </div>
-        <div>
-            <span><span id="countdown-minutes"></span> Minuter&nbsp;</span>
-        </div>
-        <div>
-            <span><span id="countdown-seconds"></span> Sekunder</span>
+<main id="main" hx-get="<%~ it.nextPage %>" hx-trigger="every <%= it.pageTimeout %>" hx-swap="outerHTML">
+    <div id="ylonz">
+        <time id="ylonz-time" datetime="<%= it.ylonzDate %>"></time>
+        <h1>Tid till Ylonz</h1>
+        <div id="countdown">
+            <div>
+                <span><span id="countdown-days"></span> Dagar&nbsp;</span>
+            </div>
+            <div>
+                <span><span id="countdown-hours"></span> Timmar&nbsp;</span>
+            </div>
+            <div>
+                <span><span id="countdown-minutes"></span> Minuter&nbsp;</span>
+            </div>
+            <div>
+                <span><span id="countdown-seconds"></span> Sekunder</span>
+            </div>
         </div>
     </div>
-</div>
-
+</main>

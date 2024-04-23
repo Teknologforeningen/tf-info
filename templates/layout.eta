@@ -13,7 +13,6 @@
     <link href="/static/styles/countdown.css" rel="stylesheet">
     <script src="/static/scripts/htmx.min.js"></script>
     <script src="https://polyfill.io/v3/polyfill.min.js?features=fetch"></script>
-    <script src="/static/scripts/pages.js" defer></script>
     <script src="/static/scripts/clock.js" defer></script>
     <script src="/static/scripts/countdown.js" defer></script>
     <script src="/static/scripts/votes.js" defer></script>
@@ -33,9 +32,7 @@
 </header>
 
 <body>
-    <main id="main">
-        <%~ it.body %>
-    </main>
+    <%~ it.body %>
 </body>
 
 <footer>

@@ -10,7 +10,7 @@ const {
   CAM_URL,
   YLONZ_DATE,
   VOTES_URL,
-  PAGE_TIMEOUT = 10000,
+  PAGE_TIMEOUT = "10s",
   REFRESH_TIME = "04:00",
 } = Deno.env.toObject();
 
@@ -46,41 +46,20 @@ async function handler(req: Request): Promise<Response> {
     });
   }
 
-  const renderData = await fetchRenderData();
+  const pages = PAGES
+    .filter((p) => p.condition())
+    .map((p) => p.id);
+
+  const pageMatch = PAGE_ROUTE.exec(req.url);
+  if (pageMatch) return pageHandler(pages, pageMatch);
+
+  const renderData = await fetchRenderData(pages, "");
 
   switch (pathname) {
     case "/pi-temp": {
       const html = await eta.renderAsync("pi-temp", renderData);
       return new Response(html);
     }
-  }
-
-  const pages = PAGES
-    .filter((p) => p.condition())
-    .map((p) => p.id);
-
-  const pageMatch = PAGE_ROUTE.exec(req.url);
-  if (pageMatch) {
-    let pageId = pageMatch.pathname.groups.id ?? "";
-    if (!pages.includes(pageId)) {
-      const pageNumber = parseInt(pageId);
-      if (0 <= pageNumber && pageNumber < pages.length) {
-        pageId = pages[pageNumber];
-      } else {
-        return new Response("Page not found", { status: 404 });
-      }
-    }
-
-    const html = await eta.renderAsync(pageId, renderData);
-
-    const page: PageResponse = {
-      id: pageId,
-      nextPage: nextPage(pages, pageId),
-      timeout: PAGE_TIMEOUT as number,
-      html,
-    };
-
-    return Response.json(page);
   }
 
   if (pathname.startsWith("/pages")) {
@@ -96,6 +75,25 @@ async function handler(req: Request): Promise<Response> {
 
 Deno.serve(handler);
 
+async function pageHandler(
+  pages: readonly string[],
+  match: URLPatternResult,
+): Promise<Response> {
+  let pageId = match.pathname.groups.id ?? "";
+  if (!pages.includes(pageId)) {
+    const pageNumber = parseInt(pageId);
+    if (0 <= pageNumber && pageNumber < pages.length) {
+      pageId = pages[pageNumber];
+    } else {
+      return new Response("Page not found", { status: 404 });
+    }
+  }
+
+  const renderData = await fetchRenderData(pages, pageId);
+  const html = await eta.renderAsync(pageId, renderData);
+  return new Response(html);
+}
+
 async function fetchPiTemp(): Promise<number | null> {
   try {
     const res = await fetch("https://mask.tf.fi/data/pi/temperature");
@@ -107,6 +105,8 @@ async function fetchPiTemp(): Promise<number | null> {
 }
 
 type RenderData = {
+  nextPage: PageResponse["id"];
+  pageTimeout: string;
   piTemp: number | null;
   menu: Menu | null;
   alacarte: string | null;
@@ -116,7 +116,10 @@ type RenderData = {
   votes: typeof VOTES_URL;
 };
 
-async function fetchRenderData(): Promise<RenderData> {
+async function fetchRenderData(
+  pages: readonly string[],
+  pageId: string,
+): Promise<RenderData> {
   const res = await Promise.all([
     fetchPiTemp(),
     fetchMenu(),
@@ -124,6 +127,8 @@ async function fetchRenderData(): Promise<RenderData> {
   ]);
 
   return {
+    nextPage: nextPage(pages, pageId),
+    pageTimeout: PAGE_TIMEOUT,
     piTemp: res[0],
     menu: res[1],
     alacarte: res[2],
@@ -160,5 +165,5 @@ function nextPage(
 ): PageResponse["id"] {
   const pagesLength = pages.length;
   const nextIndex = pages.indexOf(currentPage) + 1;
-  return pages[nextIndex % pagesLength];
+  return `/pages/${pages[nextIndex % pagesLength]}`;
 }
