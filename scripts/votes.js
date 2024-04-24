@@ -1,4 +1,4 @@
-const votes = document.getElementById("votes");
+let votes = document.getElementById("votes");
 const INITIAL_VOTE_MAIN_WIDTH = 32;
 const VOTE_COL_WIDTH = 20;
 
@@ -12,14 +12,19 @@ const votesRegex = /((?:width|left): ?\d{1,3})(?!px)(;|")/g;
  * by setting the correct width the element will be centered correctly.
  */
 function centerVotes() {
-  votes.innerHTML = votes.innerHTML.replaceAll(votesRegex, "$1px$2");
+  if (!votes) {
+    votes = document.getElementById("votes");
+  }
+  votes.innerHTML = votes.innerHTML.replace(votesRegex, "$1px$2");
   const voteMain = votes.querySelector("#voteMain");
   voteMain.style.width = votesWidth(voteMain) + "px";
 }
 
 function votesWidth(voteMain) {
   let width = INITIAL_VOTE_MAIN_WIDTH;
-  for (const c of voteMain.children) {
+  const children = voteMain.children;
+  for (let i = 0; i < children.length; i++) {
+    const c = children[i];
     const w = parseInt(c.style.left.replace("px", ""));
     if (w > width) {
       width = w;
