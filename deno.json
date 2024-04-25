@@ -1,11 +1,16 @@
 {
-  "deno.enable": true,
-  "deno.lint": true,
-  "deno.unstable": true,
-  "fmt": {
-    "lineWidth": 120
-  },
-  "tasks": {
-    "dev": "deno run --watch --allow-read --allow-env --allow-net main.ts"
-  }
+    "deno.enable": true,
+    "deno.lint": true,
+    "deno.unstable": true,
+    "fmt": {
+        "lineWidth": 120
+    },
+    "tasks": {
+        "dev": "deno run --watch --allow-read --allow-env --allow-net main.ts"
+    },
+    "imports": {
+        "@std/http": "https://deno.land/std@0.223.0/http/mod.ts",
+        "@std/dotenv": "https://deno.land/std@0.223.0/dotenv/load.ts",
+        "eta": "https://deno.land/x/eta@v3.1.0/src/index.ts",
+    }
 }

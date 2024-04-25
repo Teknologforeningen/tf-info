@@ -14,6 +14,8 @@ USER deno
 COPY deno.json .
 COPY deno.lock .
 COPY *.ts .
+COPY dagsen ./dagsen
+COPY members ./members
 COPY templates ./templates
 COPY public ./public
 COPY --from=scripts /src/scripts public/scripts

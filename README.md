@@ -10,10 +10,12 @@ A static site to be displayed on info-screens around [Teknologföreningen](https
 
 ## Environmental variables
 
-Required environmental variables can be found in `main.ts`.
+See `.env.example`
 
 # Running
 
-The server can be ran with the following command:
+## Development
 
-`deno run --allow-env --allow-read --allow-net main.ts`
+The development server can be run with the following command:
+
+`deno task dev`
