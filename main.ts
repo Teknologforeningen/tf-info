@@ -1,7 +1,7 @@
 import "https://deno.land/std@0.210.0/dotenv/load.ts";
 import { serveDir } from "https://deno.land/std@0.207.0/http/file_server.ts";
 import { Eta } from "https://deno.land/x/eta@v3.1.0/src/index.ts";
-import { fetchAlaCarte, fetchMenuJSON, fetchMenuText, Language, LANGUAGES, Menu, openTime } from "./dagsen.ts";
+import * as dagsen from "./dagsen/api.ts";
 import { createPage, Page } from "./page.ts";
 import { helsinkiDate } from "./date.ts";
 
@@ -93,7 +93,7 @@ async function pageHandler(pages: readonly string[], match: URLPatternResult): P
 }
 
 async function dagsenHandler(params: URLSearchParams): Promise<Response> {
-  let lang = params.get("lang") as Language | null;
+  let lang = params.get("lang") as dagsen.Language | null;
 
   if (lang !== null) {
     const renderData = await fetchDagsenRenderData(lang);
@@ -104,7 +104,7 @@ async function dagsenHandler(params: URLSearchParams): Promise<Response> {
   }
 
   lang = lang ?? "sv";
-  if (!LANGUAGES.includes(lang)) {
+  if (!dagsen.LANGUAGES.includes(lang)) {
     lang = "sv";
   }
 
@@ -129,7 +129,7 @@ type RenderData = {
   nextPage: PageResponse["id"];
   pageTimeout: string;
   piTemp: number | null;
-  menu: Menu | null;
+  menu: dagsen.Menu | null;
   alacarte: string | null;
   cam: typeof CAM_URL;
   ylonzDate: Date;
@@ -140,8 +140,8 @@ type RenderData = {
 async function fetchRenderData(pages: readonly string[], pageId: string): Promise<RenderData> {
   const res = await Promise.all([
     fetchPiTemp(),
-    fetchMenuJSON(),
-    fetchAlaCarte(),
+    dagsen.fetchMenuJSON(),
+    dagsen.fetchAlaCarte(),
   ]);
 
   return {
@@ -168,7 +168,7 @@ type DagsenRenderData = {
   pageTimeout: string;
 };
 
-async function fetchDagsenRenderData(language: Language): Promise<DagsenRenderData> {
+async function fetchDagsenRenderData(language: dagsen.Language): Promise<DagsenRenderData> {
   const now = new Date();
 
   const date = now.toLocaleDateString("en-GB", { year: "2-digit", month: "2-digit", "day": "2-digit" })
@@ -176,13 +176,13 @@ async function fetchDagsenRenderData(language: Language): Promise<DagsenRenderDa
     .slice(0, 2)
     .join("/");
 
-  const menuItems = (await fetchMenuText(language))?.split("\r\n") ?? [];
+  const menuItems = (await dagsen.fetchMenuText(language))?.split("\r\n") ?? [];
 
   return {
     date,
     menuItems: menuItems,
-    openTime: openTime(now),
-    nextPage: nextDagsenPage(LANGUAGES, language),
+    openTime: dagsen.openTime(now),
+    nextPage: nextDagsenPage(dagsen.LANGUAGES, language),
     pageTimeout: "5s",
   };
 }
@@ -210,7 +210,7 @@ function nextPage(pages: readonly string[], currentPage: PageResponse["id"]): Pa
   return `/pages/${pages[nextIndex % pagesLength]}`;
 }
 
-function nextDagsenPage(languages: readonly Language[], currentLanguage: Language): string {
+function nextDagsenPage(languages: readonly dagsen.Language[], currentLanguage: dagsen.Language): string {
   const languagesLength = languages.length;
   const nextIndex = languages.indexOf(currentLanguage) + 1;
   return `/dagsen?lang=${languages[nextIndex % languagesLength]}`;

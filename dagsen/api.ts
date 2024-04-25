@@ -1,4 +1,4 @@
-import { helsinkiDate } from "./date.ts";
+import { helsinkiDate } from "../date.ts";
 
 export type Menu = {
   dayname: string;
