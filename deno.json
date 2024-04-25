@@ -1,5 +1,11 @@
 {
-    "deno.enable": true,
-    "deno.lint": true,
-    "deno.unstable": true,
+  "deno.enable": true,
+  "deno.lint": true,
+  "deno.unstable": true,
+  "fmt": {
+    "lineWidth": 120
+  },
+  "tasks": {
+    "dev": "deno run --watch --allow-read --allow-env --allow-net main.ts"
+  }
 }

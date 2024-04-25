@@ -1,0 +1,20 @@
+<div hx-get="<%~ it.nextPage %>" hx-trigger="every <%= it.pageTimeout %>" hx-swap="outerHTML">
+    <h1>
+        <%= it.date %>
+    </h1>
+
+    <div id="menu">
+        <% it.menuItems.forEach((menuItem) => { %>
+            <p>
+                <strong>
+                    <%= menuItem %>
+                </strong>
+            </p>
+        <% }) %>
+    </div>
+
+    <br />
+    <p id="open-time">
+        <%= it.openTime %>
+    </p>
+</div>

@@ -10,12 +10,23 @@ export type Menu = {
   extra?: string;
 };
 
-export async function fetchMenu(
-  day: 0 | 1 = dayNumber(helsinkiDate()),
-): Promise<Menu | null> {
+export const LANGUAGES = ["sv", "fi", "en"] as const;
+export type Language = typeof LANGUAGES[number];
+
+export async function fetchMenuJSON(day: 0 | 1 = dayNumber(helsinkiDate())): Promise<Menu | null> {
   try {
     const res = await fetch(`http://api.teknolog.fi/taffa/sv/json/${day}`);
     return res.json();
+  } catch (e) {
+    console.error("Failed to fetch menu from lunch API:", e);
+    return null;
+  }
+}
+
+export async function fetchMenuText(lang: Language): Promise<string | null> {
+  try {
+    const res = await fetch(`http://api.teknolog.fi/taffa/${lang}/today`);
+    return res.text();
   } catch (e) {
     console.error("Failed to fetch menu from lunch API:", e);
     return null;
@@ -38,4 +49,9 @@ export async function fetchAlaCarte(): Promise<string | null> {
     console.error("Failed to fetch Á la carte from lunch API:", e);
     return null;
   }
+}
+
+export function openTime(now: Date): string {
+  const weekday = now.getDay();
+  return 0 < weekday && weekday < 6 ? "10:30 - 15:00" : "";
 }

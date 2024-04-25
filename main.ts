@@ -1,9 +1,8 @@
 import "https://deno.land/std@0.210.0/dotenv/load.ts";
 import { serveDir } from "https://deno.land/std@0.207.0/http/file_server.ts";
 import { Eta } from "https://deno.land/x/eta@v3.1.0/src/index.ts";
-import { fetchAlaCarte, fetchMenu, Menu } from "./dagsen.ts";
-import { Page } from "./page.ts";
-import { createPage } from "./page.ts";
+import { fetchAlaCarte, fetchMenuJSON, fetchMenuText, Language, LANGUAGES, Menu, openTime } from "./dagsen.ts";
+import { createPage, Page } from "./page.ts";
 import { helsinkiDate } from "./date.ts";
 
 const {
@@ -37,7 +36,8 @@ const PAGES: readonly Page[] = [
 ] as const;
 
 async function handler(req: Request): Promise<Response> {
-  const pathname = new URL(req.url).pathname;
+  const url = new URL(req.url);
+  const pathname = url.pathname;
 
   if (pathname.startsWith("/static")) {
     return serveDir(req, {
@@ -45,6 +45,8 @@ async function handler(req: Request): Promise<Response> {
       urlRoot: "static",
     });
   }
+
+  if (pathname.startsWith("/dagsen")) return dagsenHandler(url.searchParams);
 
   const pages = PAGES
     .filter((p) => p.condition())
@@ -77,10 +79,7 @@ async function handler(req: Request): Promise<Response> {
 
 Deno.serve(handler);
 
-async function pageHandler(
-  pages: readonly string[],
-  match: URLPatternResult,
-): Promise<Response> {
+async function pageHandler(pages: readonly string[], match: URLPatternResult): Promise<Response> {
   const pageId = match.pathname.groups.id ?? "";
   if (!pages.includes(pageId)) {
     return new Response("Page not found", { status: 404 });
@@ -88,6 +87,29 @@ async function pageHandler(
 
   const renderData = await fetchRenderData(pages, pageId);
   const html = await eta.renderAsync(pageId, renderData);
+  return new Response(html, {
+    headers: new Headers({ "Content-Type": "text/html" }),
+  });
+}
+
+async function dagsenHandler(params: URLSearchParams): Promise<Response> {
+  let lang = params.get("lang") as Language | null;
+
+  if (lang !== null) {
+    const renderData = await fetchDagsenRenderData(lang);
+    const html = await eta.renderAsync("dagsen/menu", renderData);
+    return new Response(html, {
+      headers: new Headers({ "Content-Type": "text/html" }),
+    });
+  }
+
+  lang = lang ?? "sv";
+  if (!LANGUAGES.includes(lang)) {
+    lang = "sv";
+  }
+
+  const renderData = await fetchDagsenRenderData(lang);
+  const html = await eta.renderAsync("dagsen/index", renderData);
   return new Response(html, {
     headers: new Headers({ "Content-Type": "text/html" }),
   });
@@ -115,13 +137,10 @@ type RenderData = {
   votes: typeof VOTES_URL;
 };
 
-async function fetchRenderData(
-  pages: readonly string[],
-  pageId: string,
-): Promise<RenderData> {
+async function fetchRenderData(pages: readonly string[], pageId: string): Promise<RenderData> {
   const res = await Promise.all([
     fetchPiTemp(),
-    fetchMenu(),
+    fetchMenuJSON(),
     fetchAlaCarte(),
   ]);
 
@@ -138,6 +157,33 @@ async function fetchRenderData(
       helsinkiDate(),
       REFRESH_TIME,
     ),
+  };
+}
+
+type DagsenRenderData = {
+  date: string;
+  menuItems: string[];
+  openTime: string;
+  nextPage: string;
+  pageTimeout: string;
+};
+
+async function fetchDagsenRenderData(language: Language): Promise<DagsenRenderData> {
+  const now = new Date();
+
+  const date = now.toLocaleDateString("en-GB", { year: "2-digit", month: "2-digit", "day": "2-digit" })
+    .split("/")
+    .slice(0, 2)
+    .join("/");
+
+  const menuItems = (await fetchMenuText(language))?.split("\r\n") ?? [];
+
+  return {
+    date,
+    menuItems: menuItems,
+    openTime: openTime(now),
+    nextPage: nextDagsenPage(LANGUAGES, language),
+    pageTimeout: "5s",
   };
 }
 
@@ -158,11 +204,14 @@ function calculateSecondsUntilRefresh(now: Date, refreshTime: string): number {
   return (refreshDate.getTime() - now.getTime()) / 1000;
 }
 
-function nextPage(
-  pages: readonly string[],
-  currentPage: PageResponse["id"],
-): PageResponse["id"] {
+function nextPage(pages: readonly string[], currentPage: PageResponse["id"]): PageResponse["id"] {
   const pagesLength = pages.length;
   const nextIndex = pages.indexOf(currentPage) + 1;
   return `/pages/${pages[nextIndex % pagesLength]}`;
+}
+
+function nextDagsenPage(languages: readonly Language[], currentLanguage: Language): string {
+  const languagesLength = languages.length;
+  const nextIndex = languages.indexOf(currentLanguage) + 1;
+  return `/dagsen?lang=${languages[nextIndex % languagesLength]}`;
 }
