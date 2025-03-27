@@ -21,6 +21,12 @@ The development server can be run with the following command:
 
 `deno task dev`
 
+### Scripts
+
+To also run scripts locally (for refreshing the page, changing languages and working clock):
+
+`deno task scripts` 
+
 ## htmx
 
 [htmx](https://htmx.org/) is used to solve some common problems. However, the machine running the website is running a
