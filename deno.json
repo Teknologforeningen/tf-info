@@ -6,7 +6,9 @@
         "lineWidth": 120
     },
     "tasks": {
-        "dev": "deno run --watch --allow-read --allow-env --allow-net main.ts"
+        "dev": "deno run --watch --allow-read --allow-env --allow-net main.ts",
+        "scripts": "swc compile --config-file .swcrc --out-dir public scripts && deno cache --reload --lock=deno.lock main.ts && deno run --lock=deno.lock --cached-only --allow-env --allow-read --allow-net main.ts"
+
     },
     "imports": {
         "@std/http": "https://deno.land/std@0.223.0/http/mod.ts",
