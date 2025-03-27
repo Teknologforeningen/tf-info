@@ -2,7 +2,9 @@ name: Docker Image CI
 
 on:
   push:
-    branches: ["develop"]
+    branches: 
+      - develop
+      - testing
 
 env:
   REGISTRY: ghcr.io
@@ -25,8 +27,16 @@ jobs:
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
 
+      - name: Set Image Tag
+        run: |
+          if [ "${{ github.ref_name }}" = "develop" ]; then
+            echo "IMAGE_TAG=latest" >> $GITHUB_ENV
+          elif [ "${{ github.ref_name }}" = "testing" ]; then
+            echo "IMAGE_TAG=testing" >> $GITHUB_ENV
+          fi
+
       - name: Build the Docker image
-        run: docker build . --file Dockerfile --tag ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:latest
+        run: docker build . --file Dockerfile --tag ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ env.IMAGE_TAG }}
 
       - name: Push the Docker image
-        run: docker push ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:latest
+        run: docker push ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ env.IMAGE_TAG }}
