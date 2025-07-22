@@ -15,8 +15,18 @@ export type Language = typeof LANGUAGES[number];
 
 export async function fetchMenuJSON(day: 0 | 1 = dayNumber(helsinkiDate())): Promise<Menu | null> {
   try {
-    const res = await fetch(`http://api.teknolog.fi/taffa/sv/json/${day}`);
-    return res.json();
+    const res = await fetch(`http://newapi.tf.fi/taffa/sv/json/${day}`);
+    const obj = await res.json();
+
+    const mappedMenu: Menu = {
+      dayname: obj["dayName"],
+      main: obj["Fisk/Kött"],
+      vegetarian: obj["Vegetariskt alternativ"],
+      salad: obj["Sallad"],
+      soup: obj["Soppa"],
+      alacarte: obj["A la carte"]
+    };
+    return mappedMenu;
   } catch (e) {
     console.error("Failed to fetch menu from lunch API:", e);
     return null;
@@ -25,8 +35,8 @@ export async function fetchMenuJSON(day: 0 | 1 = dayNumber(helsinkiDate())): Pro
 
 export async function fetchMenuText(lang: Language): Promise<string | null> {
   try {
-    const res = await fetch(`http://api.teknolog.fi/taffa/${lang}/today`);
-    return res.text();
+    const res = await fetch(`http://newapi.tf.fi/taffa/${lang}/today`);
+    return await res.text();
   } catch (e) {
     console.error("Failed to fetch menu from lunch API:", e);
     return null;
