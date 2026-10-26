@@ -34,7 +34,7 @@
     <br />
     <br />
 
-    <img src="/static/dagsen.png" width="400px" />
+    <img src="/static/dagsen.png" width="300px" />
     <%~ include("./menu.eta", it) %>
 </body>
 
